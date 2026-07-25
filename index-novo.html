@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriRotina — Seu planejador de stories</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#e88ba3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NutriRotina">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23e88ba3' width='180' height='180' rx='40'/><text x='90' y='90' font-size='100' text-anchor='middle' dominant-baseline='central'>📅</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,6 +49,19 @@
             font-size: 12px;
         }
         .logout-btn:hover { background: #e88ba3; }
+        .notification-btn {
+            padding: 8px 12px;
+            background: #ffd700;
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        .notification-btn:hover { background: #ffed4e; }
+        .notification-btn:disabled { opacity: 0.7; cursor: not-allowed; }
         .app-main {
             flex: 1;
             overflow-y: auto;
@@ -72,6 +91,7 @@
 
     <!-- App Scripts -->
     <script src="supabase-client.js"></script>
+    <script src="notifications.js"></script>
     <script src="auth-ui.js"></script>
     <script src="app-novo.js"></script>
 </body>
