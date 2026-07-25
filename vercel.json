@@ -1,7 +1,6 @@
 {
   "name": "nutrirotina",
   "version": 2,
-  "public": true,
   "builds": [
     {
       "src": "index-novo.html",
