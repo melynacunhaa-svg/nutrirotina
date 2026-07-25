@@ -1,0 +1,21 @@
+{
+  "name": "nutrirotina",
+  "version": 2,
+  "public": true,
+  "builds": [
+    {
+      "src": "index-novo.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index-novo.html"
+    }
+  ]
+}
