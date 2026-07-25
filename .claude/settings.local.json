@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p ~/.claude/skills/plano-do-seu-app)",
+      "Bash(ls -la /tmp/skills/ | head -20)",
+      "Read(//private/tmp/skills/**)",
+      "Bash(cat /tmp/ui-ux-pro-max-skill/skill.json)",
+      "Read(//private/tmp/ui-ux-pro-max-skill/**)",
+      "Bash(pkill -f \"http.server\")",
+      "Bash(python3 -m http.server 5500)",
+      "Bash(open \"http://localhost:5500/preview.html\")",
+      "Bash(open \"http://localhost:5500/limpar-cache.html\")",
+      "Bash(rm -f /Users/melynacunha/.python_history)",
+      "Bash(open -u \"http://localhost:5500/index.html\")",
+      "Read(//tmp/**)"
+    ],
+    "additionalDirectories": [
+      "/Users/melynacunha/.claude/skills"
+    ]
+  }
+}

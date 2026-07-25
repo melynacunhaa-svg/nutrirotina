@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste NutriRotina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e88ba3;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            background: #f9f9f9;
+            border-left: 4px solid #ddd;
+        }
+        .test-result.success {
+            border-left-color: #4CAF50;
+            background: #f1f8f6;
+        }
+        .test-result.error {
+            border-left-color: #f44336;
+            background: #fdf1f1;
+        }
+        .test-result.info {
+            border-left-color: #2196F3;
+            background: #f1f8fd;
+        }
+        button {
+            background: #e88ba3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #d67a92;
+        }
+        .json-display {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-size: 12px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-panel">
+        <div class="test-title">🔍 Teste de Funcionamento do NutriRotina</div>
+        <div id="results"></div>
+        <button onclick="runTests()">Executar Testes</button>
+        <button onclick="simulateFlow()">Simular Fluxo Completo</button>
+        <button onclick="clearData()">Limpar Dados (⚠️)</button>
+    </div>
+
+    <script>
+        function addResult(title, message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<strong>${title}</strong><br>${message}`;
+            results.appendChild(div);
+        }
+
+        function runTests() {
+            document.getElementById('results').innerHTML = '';
+
+            // Teste 1: localStorage disponível
+            try {
+                localStorage.setItem('test', 'ok');
+                localStorage.removeItem('test');
+                addResult('✓ localStorage', 'localStorage funciona corretamente', 'success');
+            } catch (e) {
+                addResult('✗ localStorage', `Erro: ${e.message}`, 'error');
+                return;
+            }
+
+            // Teste 2: Data de hoje
+            const today = new Date().toISOString().split('T')[0];
+            addResult('📅 Data de hoje', today, 'info');
+
+            // Teste 3: Checar dados salvos
+            const stories = localStorage.getItem('nutrirotina_stories');
+            const tasks = localStorage.getItem('nutrirotina_tasks');
+            const ideas = localStorage.getItem('nutrirotina_ideas');
+            const plannings = localStorage.getItem('nutrirotina_plannings');
+
+            if (stories) {
+                const parsed = JSON.parse(stories);
+                addResult('📖 Stories salvos', `${parsed.length} roteiros encontrados`, 'success');
+                if (parsed.length > 0) {
+                    parsed.forEach((s, i) => {
+                        const match = s.date === today ? '✓ HOJE' : '';
+                        addResult(`  → Story ${i + 1}`, `Data: ${s.date} ${match} | Tipo: ${s.type} | Sequences: ${s.sequences?.length || 0}`, 'info');
+                    });
+                }
+            } else {
+                addResult('📖 Stories', 'Nenhum story salvo ainda', 'info');
+            }
+
+            if (plannings) {
+                const parsed = JSON.parse(plannings);
+                addResult('📋 Plannings', `${parsed.length} planejamentos salvos`, 'success');
+            } else {
+                addResult('📋 Plannings', 'Nenhum planejamento salvo', 'info');
+            }
+
+            // Teste 4: Estrutura de um story
+            if (stories) {
+                const parsed = JSON.parse(stories);
+                if (parsed.length > 0) {
+                    const firstStory = parsed[0];
+                    const firstSeq = firstStory.sequences?.[0];
+                    if (firstSeq) {
+                        addResult('📝 Primeira sequence', `
+Número: ${firstSeq.numero}
+Categoria: ${firstSeq.categoria || 'N/A'}
+Título: ${firstSeq.titulo || 'N/A'}
+O que falar: ${(firstSeq.o_que_falar || '').substring(0, 50)}...
+Objetivo: ${firstSeq.objetivo || 'N/A'}
+                        `, 'success');
+                    }
+                }
+            }
+        }
+
+        function simulateFlow() {
+            document.getElementById('results').innerHTML = '';
+            addResult('⏳ Simulando fluxo...', 'Gerando um novo roteiro para HOJE...', 'info');
+
+            const today = new Date().toISOString().split('T')[0];
+
+            // Cria um roteiro simulado
+            const mockRoteiro = {
+                id: Date.now(),
+                date: today,
+                type: 'conexao',
+                theme: 'Fibra alimentar',
+                sequences: [
+                    {
+                        numero: 1,
+                        categoria: 'Lifestyle · Conexão',
+                        titulo: 'Começo de dia real',
+                        o_que_mostrar: 'Sua manhã — café, rotina',
+                        texto_tela: 'Bom dia. Que comece esse dia com intenção 🌿',
+                        o_que_falar: 'Bom dia! Aqui estou tendo meu café da manhã...',
+                        objetivo: 'Gerar identificação',
+                        origin: 'Roteiro estruturado'
+                    }
+                ],
+                statuses: Array(8).fill(''),
+                reasons: Array(8).fill(''),
+                createdAt: new Date().toISOString()
+            };
+
+            // Salva na localStorage
+            let stories = localStorage.getItem('nutrirotina_stories');
+            stories = stories ? JSON.parse(stories) : [];
+            stories = stories.filter(s => s.date !== today); // Remove roteiro antigo de hoje
+            stories.push(mockRoteiro);
+            localStorage.setItem('nutrirotina_stories', JSON.stringify(stories));
+
+            addResult('✓ Roteiro criado', `Salvo para ${today}`, 'success');
+            addResult('✓ localStorage atualizado', `Total de roteiros: ${stories.length}`, 'success');
+            addResult('📝 Próximo passo', 'Abra http://localhost:8000 e vá para a página de Stories', 'info');
+        }
+
+        function clearData() {
+            if (confirm('⚠️ Tem certeza que quer limpar TODOS os dados?')) {
+                localStorage.removeItem('nutrirotina_stories');
+                localStorage.removeItem('nutrirotina_tasks');
+                localStorage.removeItem('nutrirotina_ideas');
+                localStorage.removeItem('nutrirotina_plannings');
+                localStorage.removeItem('nutrirotina_drafts');
+                document.getElementById('results').innerHTML = '';
+                addResult('✓ Dados limpos', 'Todos os dados foram deletados', 'success');
+                addResult('ℹ️ Próximo passo', 'Recarregue a página principal', 'info');
+            }
+        }
+
+        // Rodar testes automaticamente ao abrir
+        window.addEventListener('load', () => {
+            runTests();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriRotina — Seu planejador de stories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-emoji">📅</span>
+                    <div class="logo-text">
+                        <h1>NutriRotina</h1>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="logout-btn" onclick="authUI.logout()" title="Fazer logout">🚪 Sair</button>
+                    <button class="menu-toggle" aria-label="Abrir menu" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main class="app-main">
+            <div id="content" class="app-content">
+                <!-- Páginas serão renderizadas aqui -->
+            </div>
+        </main>
+
+        <!-- Navigation Footer -->
+        <nav class="app-nav" id="navMenu">
+            <ul class="nav-list">
+                <li><a href="#" data-page="home" class="nav-link active">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-label">Home</span>
+                </a></li>
+                <li><a href="#" data-page="tasks" class="nav-link">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-label">Tarefas</span>
+                </a></li>
+                <li><a href="#" data-page="ideas" class="nav-link">
+                    <span class="nav-icon">💭</span>
+                    <span class="nav-label">Ideias</span>
+                </a></li>
+                <li><a href="#" data-page="planning" class="nav-link">
+                    <span class="nav-icon">🌙</span>
+                    <span class="nav-label">Planejar</span>
+                </a></li>
+                <li><a href="#" data-page="stories" class="nav-link">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-label">Stories</span>
+                </a></li>
+                <li><a href="#" data-page="feedback" class="nav-link">
+                    <span class="nav-icon">💭</span>
+                    <span class="nav-label">Feedback</span>
+                </a></li>
+                <li><a href="#" data-page="week" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Semana</span>
+                </a></li>
+                <li><a href="#" data-page="heatmap" class="nav-link">
+                    <span class="nav-icon">🔥</span>
+                    <span class="nav-label">Heatmap</span>
+                </a></li>
+                <li><a href="#" data-page="feed" class="nav-link">
+                    <span class="nav-icon">🔥</span>
+                    <span class="nav-label">Feed</span>
+                </a></li>
+                <li><a href="#" data-page="lifestyle" class="nav-link">
+                    <span class="nav-icon">🎬</span>
+                    <span class="nav-label">Lifestyle</span>
+                </a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Template da Home -->
+    <template id="home-template">
+        <div class="page page-home">
+            <div class="greeting-section">
+                <h2 class="greeting-title">Seu dia hoje</h2>
+                <p class="date-display" id="dateDisplay">📅 24 de julho</p>
+            </div>
+
+            <!-- Seção Agenda -->
+            <section class="home-card agenda-card">
+                <div class="card-header">
+                    <h3>📅 Agenda</h3>
+                </div>
+                <div class="card-content" id="agenda-content">
+                    <div class="placeholder-text">Carregando agenda...</div>
+                </div>
+            </section>
+
+            <!-- Seção Tarefas -->
+            <section class="home-card tasks-card">
+                <div class="card-header">
+                    <h3>✅ Tarefas</h3>
+                </div>
+                <div class="card-content" id="tasks-content">
+                    <div class="placeholder-text">Tá tudo em dia por agora 💖</div>
+                </div>
+            </section>
+
+            <!-- Seção Roteiro de Stories -->
+            <section class="home-card stories-card">
+                <div class="card-header">
+                    <h3>✨ Roteiro de Stories</h3>
+                </div>
+                <div class="card-content" id="roteiro-content">
+                    <div class="placeholder-text">Ah, esqueceu de planejar ontem? Bora planejá-lo agora 😊</div>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- Template do Banco de Tarefas -->
+    <template id="tasks-page-template">
+        <div class="page page-tasks">
+            <div class="page-header">
+                <h2>✅ Banco de Tarefas</h2>
+                <p class="page-subtitle">Organize todas as suas tarefas por aqui</p>
+            </div>
+
+            <!-- Form pra adicionar tarefa -->
+            <div class="task-form-card">
+                <textarea 
+                    id="newTaskInput" 
+                    class="task-input" 
+                    placeholder="Adicionar tarefa... 📝"
+                    rows="3"
+                ></textarea>
+                <div class="task-form-controls">
+                    <input 
+                        type="date" 
+                        id="newTaskDate" 
+                        class="task-form-date"
+                    />
+                    <button id="addTaskBtn" class="btn btn-primary">
+                        ➕ Adicionar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de tarefas -->
+            <div id="tasks-list-container">
+                <div class="placeholder-text">Carregando tarefas...</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template do Banco de Ideias -->
+    <template id="ideas-page-template">
+        <div class="page page-ideas">
+            <div class="page-header">
+                <h2>💭 Banco de Ideias</h2>
+                <p class="page-subtitle">Capture ideias soltas de conteúdo</p>
+            </div>
+
+            <!-- Form pra adicionar ideia -->
+            <div class="idea-form-card">
+                <textarea
+                    id="newIdeaInput"
+                    class="idea-input"
+                    placeholder="Ideia rápida... 💭&#10;(ex: 'falar sobre paciente que parou com medo de engordar depois')"
+                    rows="5"
+                ></textarea>
+                <button id="addIdeaBtn" class="btn btn-primary btn-large">
+                    💾 Salvar ideia
+                </button>
+            </div>
+
+            <!-- Lista de ideias -->
+            <div id="ideas-list-container">
+                <div class="placeholder-text">Nenhuma ideia cadastrada ainda. Comece a capturar! 💡</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Planejamento Noturno -->
+    <template id="planning-page-template">
+        <div class="page page-planning">
+            <div class="page-header">
+                <h2>🌙 Planejamento Noturno</h2>
+                <p class="page-subtitle">Registre como vai ser seu dia de amanhã</p>
+            </div>
+
+            <div class="planning-form-card">
+                <div class="form-group">
+                    <label for="planningLocal">📍 Onde você vai estar?</label>
+                    <select id="planningLocal" class="form-select">
+                        <option value="">Escolha um local...</option>
+                        <option value="viamao">Viamão</option>
+                        <option value="poa">Porto Alegre</option>
+                        <option value="casa">Casa</option>
+                        <option value="consultorio">Consultório</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="planningConsultas">👩‍⚕️ Quantas consultas tem?</label>
+                    <div class="number-input-group">
+                        <button class="number-btn" id="minusBtn">−</button>
+                        <input type="number" id="planningConsultas" class="number-input" min="0" max="10" value="0" />
+                        <button class="number-btn" id="plusBtn">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="planningExerciseTime">🚴 Que horas você vai fazer exercício amanhã?</label>
+                    <input type="time" id="planningExerciseTime" class="form-select" />
+                </div>
+
+                <div class="form-group">
+                    <label for="planningType">🎬 Que tipo de dia vai ser?</label>
+                    <select id="planningType" class="form-select">
+                        <option value="conexao">🤝 Conexão (Humanização)</option>
+                        <option value="venda">💰 Venda (Conversão)</option>
+                        <option value="identificacao">🔍 Identificação (Problema)</option>
+                        <option value="ensinamento">📚 Ensinamento (Educação)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="planningTheme">💡 Tema do dia (opcional)</label>
+                    <input type="text" id="planningTheme" class="form-select" placeholder="Ex: Fibra alimentar, Emagrecimento saudável, etc" />
+                </div>
+
+                <div class="form-group">
+                    <label for="planningNotes">📝 Observações (opcional)</label>
+                    <textarea id="planningNotes" class="planning-textarea" placeholder="Algo especial pra amanhã?" rows="3"></textarea>
+                </div>
+
+                <button id="planBtn" class="btn btn-primary btn-large">
+                    ✨ Planejar amanhã
+                </button>
+            </div>
+
+            <div id="planning-success-message" class="success-message" style="display: none;">
+                <p>Seu roteiro tá pronto pra amanhã! 💖 Durma bem. ✨</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Roteiro de Stories -->
+    <template id="stories-page-template">
+        <div class="page page-stories">
+            <div class="page-header">
+                <h2>✨ Seu Roteiro de Stories</h2>
+                <p class="page-subtitle" id="storiesSubtitle">Pronto pra arrasar hoje!</p>
+            </div>
+
+            <div id="stories-container">
+                <div class="placeholder-text">Nenhum roteiro gerado ainda. Planeje seu dia à noite! 🌙</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Feed de Novidades -->
+    <template id="feed-page-template">
+        <div class="page page-feed">
+            <div class="page-header">
+                <h2>🔥 Feed de Novidades</h2>
+                <p class="page-subtitle">Assuntos trending em nutrição prontos pra virar story</p>
+            </div>
+
+            <div id="feed-container">
+                <div class="placeholder-text">Carregando novidades...</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Rascunho de Conteúdo -->
+    <template id="draft-page-template">
+        <div class="page page-draft">
+            <div class="page-header">
+                <h2>📝 Rascunho de Conteúdo</h2>
+                <p class="page-subtitle" id="draftSubtitle">Edite e personalize seu roteiro</p>
+            </div>
+
+            <div id="draft-content">
+                <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Meus Rascunhos -->
+    <template id="drafts-list-template">
+        <div class="page page-drafts">
+            <div class="page-header">
+                <h2>📚 Meus Rascunhos</h2>
+                <p class="page-subtitle">Conteúdos prontos pra customizar e publicar</p>
+            </div>
+
+            <div id="drafts-list-container">
+                <!-- Lista dinâmica de rascunhos -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Semana -->
+    <template id="week-page-template">
+        <div class="page page-week">
+            <div class="page-header">
+                <h2>📊 Sua Semana</h2>
+                <p class="page-subtitle">Acompanhe sua consistência</p>
+            </div>
+
+            <div class="week-navigation">
+                <button id="week-prev" class="week-nav-btn">← Semana anterior</button>
+                <span id="week-range" class="week-range"></span>
+                <button id="week-next" class="week-nav-btn">Próxima semana →</button>
+            </div>
+
+            <div id="week-grid" class="week-grid">
+                <!-- Grid de dias será renderizado aqui -->
+            </div>
+
+            <div class="week-legend">
+                <div class="legend-item">
+                    <span class="legend-dot" style="background: #e88ba3;"></span>
+                    <span>Postei stories</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background: #a8d5a8;"></span>
+                    <span>Treinei</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background: #a8c5d5;"></span>
+                    <span>Cumpri tarefas</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background: #e0e0e0;"></span>
+                    <span>Sem atividades</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Heatmap -->
+    <template id="heatmap-page-template">
+        <div class="page page-heatmap">
+            <div class="page-header">
+                <h2>🔥 Seu Heatmap Anual</h2>
+                <p class="page-subtitle">Acompanhe sua consistência ao longo do ano</p>
+            </div>
+
+            <div id="heatmap-container">
+                <!-- Heatmap será renderizado aqui -->
+            </div>
+
+            <div class="heatmap-legend">
+                <div class="legend-item">
+                    <span class="legend-square" style="background: #f0f0f0;"></span>
+                    <span>Nenhuma</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-square" style="background: #f5d5de;"></span>
+                    <span>1 atividade</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-square" style="background: #eb9bb1;"></span>
+                    <span>2 atividades</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-square" style="background: #e88ba3;"></span>
+                    <span>3+ atividades</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template Feedback -->
+    <template id="feedback-page-template">
+        <div class="page page-feedback">
+            <div class="page-header">
+                <h2>💭 Como foi seu dia?</h2>
+                <p class="page-subtitle">Registre seu humor e feedback de cada atividade</p>
+            </div>
+
+            <!-- Seletor de Humor -->
+            <div class="mood-selector-card">
+                <h3>🎯 Como você se sente hoje?</h3>
+                <div id="mood-selector" class="mood-selector">
+                    <button class="mood-btn" data-mood="1" title="Péssimo">😞<span>Péssimo</span></button>
+                    <button class="mood-btn" data-mood="2" title="Ruim">😐<span>Ruim</span></button>
+                    <button class="mood-btn" data-mood="3" title="Neutro">😊<span>Neutro</span></button>
+                    <button class="mood-btn" data-mood="4" title="Bom">😄<span>Bom</span></button>
+                    <button class="mood-btn" data-mood="5" title="Ótimo">🤩<span>Ótimo</span></button>
+                </div>
+            </div>
+
+            <div id="feedback-content">
+                <!-- Atividades e feedback serão renderizadas aqui -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Template das páginas vazias -->
+    <template id="page-template">
+        <div class="page">
+            <div class="page-header">
+                <h2 id="pageTitle">Página</h2>
+            </div>
+            <div class="empty-message">
+                <p>Em breve por aqui 🚀</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- Supabase via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.0"></script>
+
+    <!-- Arquivos do app -->
+    <script src="supabase-client.js"></script>
+    <script src="auth-ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
