@@ -276,21 +276,3 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// Inicializa quando pronto
-function initApp() {
-    console.log('📱 Iniciando app...');
-    if (typeof window.nutriRotina === 'undefined') {
-        try {
-            window.nutriRotina = new NutriRotina();
-        } catch (error) {
-            console.error('❌ Erro:', error);
-        }
-    }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    setTimeout(initApp, 100);
-}
