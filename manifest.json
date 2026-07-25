@@ -2,7 +2,7 @@
   "name": "NutriRotina - Seu Planejador de Stories",
   "short_name": "NutriRotina",
   "description": "App de planejamento de stories com notificações push",
-  "start_url": "/index-novo.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#e88ba3",
