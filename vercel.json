@@ -1,15 +1,16 @@
 {
-  "name": "nutrirotina",
   "version": 2,
-  "builds": [
-    {
-      "src": "index-novo.html",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.js)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.json)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.html)",
       "dest": "/$1"
     },
     {
