@@ -1,5 +1,6 @@
 # 📱 NutriRotina — Plano do MVP
-> Um app pessoal que organiza sua rotina diária integrando Google Calendar, sugere roteiro de stories baseado no seu dia, e aprende com seu padrão.
+
+> Um app que organiza sua rotina pessoal, consultório e conteúdo de redes sociais em um só lugar — com roteiros de stories prontos pra postar todo dia.
 
 ---
 
@@ -7,125 +8,183 @@
 
 | Tema | Decisão |
 |---|---|
-| **Quem usa** | Melyna Cunha (nutricionista, 1 pessoa, uso pessoal) — sem login, sem multi-usuário |
-| **Quando funciona** | Mobile-first (celular o tempo todo), funciona bem em computador também |
-| **Onde os dados ficam** | localStorage primeiro (Fases 0–6), Supabase + Google Calendar API na fase final |
-| **Identidade visual** | Paleta: rosa `#e88ba3` + cinza `#6b6b6b` + branco + cinza claro `#e0e0e0`. Fonte: Plus Jakarta Sans + Inter. Vibe: clean, acessível, tipo Sunsama. Tom de voz: simples, direto, próximo, "tu", emojis equilibrados (💖 ✨ 💫 🌿) |
-| **Referência de layout** | Inspiração em: Notion (organização por categorias), Sunsama (simplicidade), Google Calendar (base visual) |
+| **Pra quem** | Pra você (nutricionista), inicialmente. Depois pode expandir pra outras nutricionistas. |
+| **Precisa de login?** | Não na Fase 0-7 (dados locais). Login + Supabase entram na Aula 3. |
+| **Mobile-first** | Sim. Funciona perfeito no celular, adapta pra desktop. Preview duplo mostra os dois lado a lado. |
+| **Dados** | Fase 0-7: localStorage (navegador). Aula 3: migra pra Supabase com login. |
+| **Paleta** | Rosa quente `#e88ba3` + Verde menta `#7ec8c8` + Cinza claro `#f0f0f0` + Preto `#2a2a2a` |
+| **Tipografia** | Poppins (títulos) + Inter (corpo). Clean, moderno, wellness. |
+| **Referência visual** | Direct Line (cards arredondados, bottom bar, heatmap), mas com estética própria. |
 
 ---
 
 ## 2. Telas do app
 
-| Tela | O que a pessoa faz nela |
+| Tela | O que você faz nela |
 |---|---|
-| **Home (dia de hoje)** | Vê tudo de uma vez: agenda do dia (Google Calendar), tarefas do dia (do banco de tarefas), e o roteiro de stories gerado pelo app. É a primeira tela que abre. |
-| **Planejamento noturno** | À noite, registra como vai ser amanhã: onde vai estar (Viamão/POA/casa/consultório), quantas consultas tem e em qual período, qual período tá livre. O app processa e gera o roteiro pra manhã. |
-| **Roteiro de stories** | Vê o roteiro gerado, dividido em 3 categorias fixas (Humanização, Engajamento, Vendas). Pode marcar como "postei" ou "não postei" com motivo. |
-| **Banco de tarefas** | Adiciona tarefas ao longo do dia. As tarefas do dia aparecem na Home. Pode marcar como feita, adicionar data ou deixar solta. |
-| **Banco de ideias** | Campo rápido de texto pra anotar ideias soltas de conteúdo (no consultório, no trânsito, etc.). Ideias ficam armazenadas e o app puxa delas quando monta o roteiro. |
-| **Feed de novidades** | Vê assuntos do momento em nutrição/emagrecimento já transformados em pautas prontas pra story. Pode salvar uma novidade como ideia no banco. |
-| **Atualização noturna (feedback)** | No fim do dia, registra: o que postou, o que funcionou, o que não postou e por quê. O app usa isso pra ajustar sugestões futuras. |
+| **Home (Painel)** | Vê sua semana em heatmap, calendário visual, e tudo que tem pra fazer hoje (hábitos, tarefas, consultório, rotina). Adiciona novas ações. |
+| **Hábitos** | Rastreia hábitos diários, marca como concluído, vê heatmap de consistência (quanto tempo seguido fez cada hábito). |
+| **Metas** | Cria metas com datas, acompanha progresso (%), histórico de evolução. |
+| **Consultório** | Lista consultas agendadas, observações de pacientes, lembretes de retorno. |
+| **Tarefas** | Gerencia tarefas do dia/semana, marca como concluído, categoriza (pessoal/trabalho/conteúdo). |
+| **Roteiros** | Vê roteiros prontos de stories por categoria (Humanização, Engajamento, Vendas), marca status (rascunho/pronto/gravado/postado). |
+| **Banco de Ideias** | Anota ideias soltas, classifica como conteúdo/pessoal/trabalho, depois converte em tarefa ou roteiro. |
+| **Humor** | Faz o check-in emocional do dia (emoji), vê retrospectiva da semana. |
+| **Diário** | Escreve livremente com data, revê entradas antigas. |
 
 ---
 
 ## 3. O diferencial (detalhado)
 
-### ⭐ Roteiro inteligente de stories — o coração do app
+### A função nº 1: **Home como painel único da sua vida**
 
-**À noite:** você abre o app e registra como vai ser seu amanhã — onde vai estar, quantas consultas, qual período tá livre.
+Quando você abre o app, vê tudo que importa hoje:
 
-**De manhã:** quando abre o app, o roteiro de stories já tá pronto, **adaptado especificamente ao seu dia e ao que você já cadastrou**. Ele puxa de três fontes, nesta ordem:
+**Topo da tela:**
+- Saudação ("Boa tarde, Melyna")
+- Pontos/progresso de gamificação (entra na Versão 2, mas estrutura já fica pronta)
+- Indicador de "X dias seguido" de alguma meta/hábito importante
 
-1. **Suas ideias cadastradas** (prioridade máxima) — se você anotou "falar sobre fome emocional", isso entra no roteiro.
-2. **Trending topics em nutrição/emagrecimento** (do feed de novidades).
-3. **Sugestões automáticas** baseadas no tipo de dia que você tem (muitas consultas = conteúdo de autoridade; manhã livre = bastidor/humanização).
+**Calendário semanal visual:**
+- Barra de dias (seg-dom) com indicador de qual é hoje
+- Cada dia mostra um pequeno heatmap/progresso do dia
+- Você pode navegar pra semana anterior/próxima com setinhas
 
-**Exemplo real:**
-> Você registrou à noite: "Amanhã: 3 consultas à tarde em POA, manhã livre em casa."  
-> De manhã, o roteiro tá pronto:  
-> 1. **Humanização:** bastidores do consultório (a foto do seu dia)  
-> 2. **Autoridade:** paciente que parou com medo de engordar depois (sua ideia cadastrada)  
-> 3. **Vendas:** convite pra agendar consultoria  
+**O que fazer HOJE:**
+- **Seção "Hoje"** mostrando:
+  - Seus hábitos do dia (checkbox de concluído ou não)
+  - Tarefas pendentes (com horário se tem)
+  - Consultório: consultas agendadas (paciente, horário)
+  - Rotina fixa: coisas que você combinou pra fazer todo dia
+  - Banco de ideias marcados pra hoje
 
-**As 3 categorias são fixas:**
-- **Humanização:** bastidores, rotina, histórias reais, conexão pessoal.
-- **Engajamento:** caixinhas, quizzes, perguntas, interação.
-- **Vendas:** quebra de objeção, convite pra agendar, mostrar como funciona o acompanhamento.
+**Botão flutuante:**
+- "+ Adicionar ação" → abre modal pra criar hábito, tarefa, consulta, ideia ou roteiro
 
-**Sem o planejamento noturno, o roteiro não funciona** — ele é o gatilho que faz o app processar e sugerir.
+### A função nº 2 (próxima): **Hábitos com visual de consistência**
+
+Não é só checkbox. Você vê em um heatmap estilo GitHub:
+- Qual foi o seu "record" (X dias seguidos)
+- Quais dias você fez/não fez
+- Tendência da semana/mês
+- Cada hábito tem uma cor
 
 ---
 
 ## 4. O que o app guarda
 
-**Tarefa**
-- Título, status (pendente / fazendo / feita), data (opcional), criada em
+Tudo é salvo no navegador (localStorage). Estrutura simples em português:
 
-**Ideia de conteúdo**
-- Texto da ideia, criada em, status (nova / usada no roteiro)
+**Hábitos:**
+- Nome (ex: "Beber 2L de água")
+- Descrição (ex: "8 copos por dia")
+- Frequência (diário/semanal/custom)
+- Cor (pra identificar rápido)
+- Data de início
+- Histórico: {data: true/false} (concluiu ou não?)
 
-**Planejamento noturno**
-- Data do dia seguinte, local (Viamão / POA / casa / consultório), número de consultas, período livre (manhã / tarde / ambos), observações
+**Metas:**
+- Nome (ex: "30 dias sem açúcar")
+- Descrição
+- Data de início, data de término
+- Progresso (%)
+- Histórico de evolução
 
-**Roteiro de stories**
-- Data, sequências (categoria + descrição + origem [minha ideia / novidade / automática]), status (postei / não postei), feedback noturno
+**Tarefas:**
+- Título
+- Descrição
+- Data, horário (opcional)
+- Categoria (pessoal/trabalho/conteúdo)
+- Status (pendente/concluído)
+- Prioridade (baixa/média/alta)
 
-**Feedback noturno**
-- Data, o que postou, o que não postou, motivo, observações gerais
+**Consultório/Agenda:**
+- Paciente: nome, telefone
+- Data, horário
+- Observações
+- Status (agendado/feito/cancelado)
 
-**Agenda (do Google Calendar)**
-- Lida do Google Calendar, apenas leitura no MVP: consultas, horários, local
+**Roteiros de Stories:**
+- Título (ex: "A nutri que ninguém vê")
+- Categoria (Humanização/Engajamento/Vendas)
+- Plataforma (Instagram/TikTok/YouTube)
+- Texto do roteiro (abertura, transições, encerramento)
+- Status (rascunho/pronto/gravado/postado)
 
-**Como tudo se liga:**
-- O roteiro do dia puxa do banco de ideias (suas ideias têm prioridade) + feed de novidades (assuntos do momento) + padrão do seu feedback anterior.
-- O planejamento noturno alimenta o roteiro do dia seguinte.
-- O feedback noturno ajusta as sugestões futuras (aprendizado contínuo).
+**Banco de Ideias:**
+- Título
+- Descrição
+- Categoria (conteúdo/pessoal/trabalho)
+- Data criada
+- Status (ideia/rascunho/desenvolvimento)
+
+**Gamificação:**
+- Pontos totais
+- Nível atual
+- Histórico de pontos (data, origem — hábito/tarefa concluído, quantos pontos)
+
+**Humor/Check-in:**
+- Data
+- Emoji/humor do dia
+- Nota opcional
+
+**Diário:**
+- Data
+- Texto da entrada
 
 ---
 
 ## 5. Fases de construção
 
-| Fase | O que entrega | Quando |
-|---|---|---|
-| **0. Setup + preview duplo** | Projeto rodando no navegador, mobile-first, com a identidade do NutriRotina (paleta rosa + cinza + branco, Plus Jakarta Sans, tom de voz). **Uma tela de preview (`preview.html`) que mostra o app duas vezes lado a lado: à esquerda numa moldura de celular (~390px), à direita em largura de computador. Os dois iframes apontam pro mesmo app rodando, então tudo funciona nos dois tamanhos ao mesmo tempo.** | Aula 2 |
-| **1. Home (dia de hoje)** | Tela principal com: agenda do Google Calendar do dia (integração read-only, dados fake pra agora), banco de tarefas visível, espaço reservado pro roteiro. Dados em localStorage. | Aula 2 |
-| **2. Banco de tarefas** | Adicionar, marcar como feita, ver tarefas do dia. Acumulador que vai alimentando e aparece na Home. | Aula 2 / dever |
-| **3. Banco de ideias** | Campo rápido de texto pra anotar ideias soltas. Lista de ideias cadastradas com status (nova/usada). | Dever de casa |
-| **4. Planejamento noturno + Roteiro de stories** | Tela noturna onde registra como vai ser amanhã. O app processa e gera o roteiro (com as 3 categorias). Roteiro aparece na Home de manhã. | Dever de casa |
-| **5. Feed de novidades** | Assuntos do momento em nutrição/emagrecimento transformados em pautas prontas. Pode salvar como ideia. | Versão 2* |
-| **6. Feedback noturno (loop de aprendizado)** | No fim do dia, registra o que postou/não postou e por quê. O app ajusta sugestões futuras. | Versão 2* |
-| **Final. Publicar** | Google Calendar API (leitura real) + Supabase (dados de verdade, sem login) + deploy na Vercel + PWA no celular | Aula 3 |
-
-**\*Nota:** Fases 5 e 6 podem ser adicionadas antes da publicação se houver tempo. Elas refinam o aprendizado, mas não são essenciais pro app cumprir a promessa inicial (roteiro automático baseado no dia + tarefas + ideias).
-
----
-
-## 6. Versão 2 (fica pra depois)
-
-Essas ideias não entram no MVP — são melhorias futuras:
-
-- Metas e objetivos mensais com acompanhamento visual (meta de pacientes, meta de posts, meta de treinos).
-- Sincronização bidirecional com Google Calendar (editar dos dois lados).
-- Agendamento automático de posts no Instagram.
-- Notificação push lembrando de postar os stories do dia.
-- Integração com TikTok e YouTube.
-- Versão pra vender pra outros nutricionistas.
-- Feed de novidades com IA analisando trending topics em tempo real.
+| Fase | O que entrega | Quando (workshop) | Status |
+|---|---|---|---|
+| **0. Setup + Preview duplo** | Projeto rodando, paleta + fonte aplicadas, preview mostrando app em celular e desktop lado a lado. | Aula 2 | ✅ Pronto |
+| **1. Home (Painel)** | Calendário semanal visual, lista do dia (hábitos, tarefas, consultório, rotina), botão pra adicionar ação. Dados salvam em localStorage. | Aula 2 | ✅ Pronto |
+| **2. Hábitos com heatmap** | Página de hábitos com checkbox diário, heatmap visual de consistência, records, histórico. | Aula 2 / Dever | ✅ Pronto |
+| **3. Metas com progresso** | Criar metas, ver progresso (%), histórico de evolução, visual de progresso. | Dever de casa | ✅ Pronto |
+| **4. Consultório/Agenda** | Listar consultas, adicionar pacientes, observações, lembretes de retorno. | Dever de casa | ✅ Pronto |
+| **5. Tarefas** | Gerenciar tarefas, categorizar (pessoal/trabalho/conteúdo), marcar concluído, priorizar. | Dever de casa | ✅ Pronto |
+| **6. Roteiros de Stories** | Visualizar roteiros prontos por categoria, status (rascunho/pronto/gravado/postado), copiar pra colar. | Dever de casa | ✅ Pronto |
+| **7. Banco de Ideias** | Adicionar ideias, classificar, converter em tarefa/roteiro depois (cobre o "brain dump"). | Dever de casa | ✅ Pronto |
+| **8. Gamificação** | Pontos por hábito/tarefa concluído, nível, indicador visível na Home. | Pós-workshop | ✅ Pronto |
+| **9. Humor/Check-in** | Registro diário de humor (emoji), retrospectiva da semana. Junto com o Diário na mesma aba. | Pós-workshop | ✅ Pronto |
+| **10. Diário** | Escrita livre por data, buscável. Junto com o Humor na mesma aba. | Pós-workshop | ✅ Pronto |
+| **Final. Publicar** | Conectar Supabase (dados de verdade + login), deploy na Vercel, instalar como PWA no celular. | Aula 3 | ⏳ Depois |
 
 ---
 
-## 7. Critério de pronto
+## 6. Versão 2 (fica pra depois) 🚀
 
-O app tá completo quando:
-- ✅ Abre de manhã, mostra Home com agenda + tarefas + roteiro.
-- ✅ À noite, consegue registrar como vai ser amanhã e o app gera um roteiro com as 3 categorias.
-- ✅ Banco de tarefas funciona: adiciona, marca como feita, aparece na Home.
-- ✅ Banco de ideias funciona: anota, lista aparece, as ideias podem ser puxadas pro roteiro.
-- ✅ Tudo funciona igualmente bem no celular e no computador.
-- ✅ Tom de voz tá consistente em todo o app (simples, direto, "tu", emojis equilibrados).
-- ✅ Preview duplo abre lado a lado e tudo funciona nos dois tamanhos.
+- **✅ IA como assistente de rotina completa — já construída:** o botão "+ Adicionar ação" da Home tem o "Plano de Rotina com IA": você escolhe áreas (treino, estudos, casa, leitura, skincare), a frequência e um foco opcional, e o app gera as tarefas certas pra cada área direto na Home — via regras fixas, sem gastar com API de IA.
+- **Gamificação, Humor/Check-in e Diário** viraram fases reais (8, 9 e 10 acima), na ordem de prioridade que você definiu.
+- **Brain dump** não virou fase separada — é a mesma coisa que a Fase 7 (Banco de Ideias): anotar ideia solta e depois converter em tarefa/roteiro.
+
+Sem prioridade definida ainda, mas continuam anotadas pra um dia:
+
+- **Integrações:** Google Calendar, WhatsApp, automações
+- **Relatórios avançados:** Exportar dados, gráficos de tendência
+- **Compartilhamento:** Mostrar progresso pra amigos ou comunidade
 
 ---
 
-**Documento elaborado em 24 de julho de 2026.**
+## 📋 Checklist do MVP
+
+Quando terminar todas as fases + publicar na Aula 3, você terá:
+
+- [x] Home mostrando seu dia completo
+- [x] Hábitos rastreados com visual
+- [x] Metas com progresso
+- [x] Consultório organizado
+- [x] Tarefas gerenciadas
+- [x] Roteiros de stories prontos pra postar
+- [x] IA de rotina (questionário + regras fixas) gerando tarefas por área
+- [x] Banco de ideias funcionando
+- [x] Gamificação (pontos, nível)
+- [x] Humor/check-in diário
+- [x] Diário pessoal
+- [x] Dados salvando no navegador
+- [x] Preview duplo (celular + desktop)
+- [ ] Publicado e rodando na Vercel
+- [ ] PWA instalável no celular
+
+**E aí, topou começar?** 🚀

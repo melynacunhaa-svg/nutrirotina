@@ -3,429 +3,959 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriRotina — Seu planejador de stories</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>NutriRotina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-content">
-                <div class="logo">
-                    <span class="logo-emoji">📅</span>
-                    <div class="logo-text">
-                        <h1>NutriRotina</h1>
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#home" class="nav-item active" data-section="home">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="#habits" class="nav-item" data-section="habits">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.08-2.5-1.41 1.41L6.5 17l4.08-5.12 2.34 2.85 3.12-4.04-1.41-1.41z"/>
+                </svg>
+                <span class="nav-label">Hábitos</span>
+            </a>
+            <a href="#goals" class="nav-item" data-section="goals">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                </svg>
+                <span class="nav-label">Metas</span>
+            </a>
+            <a href="#clinic" class="nav-item" data-section="clinic">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.08-2.5-1.41 1.41L6.5 17l4.08-5.12 2.34 2.85 3.12-4.04-1.41-1.41z"/>
+                </svg>
+                <span class="nav-label">Consultório</span>
+            </a>
+            <a href="#tasks" class="nav-item" data-section="tasks">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                <span class="nav-label">Tarefas</span>
+            </a>
+            <a href="#stories" class="nav-item" data-section="stories">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.08-2.5-1.41 1.41L6.5 17l4.08-5.12 2.34 2.85 3.12-4.04-1.41-1.41z"/>
+                </svg>
+                <span class="nav-label">Roteiros</span>
+            </a>
+            <a href="#ideas" class="nav-item" data-section="ideas">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <span class="nav-label">Ideias</span>
+            </a>
+            <a href="#journal" class="nav-item" data-section="journal">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2H8a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2h2V4a2 2 0 0 0-2-2zm-2 16H4V8h12v10zm2-4h-2V6H8V4h10v10z"/>
+                </svg>
+                <span class="nav-label">Diário</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="home-header">
+                    <div class="greeting">
+                        <h1>Boa tarde, Melyna</h1>
+                        <p id="current-date"></p>
                     </div>
-                </div>
-                <div class="header-actions">
-                    <button class="logout-btn" onclick="authUI.logout()" title="Fazer logout">🚪 Sair</button>
-                    <button class="menu-toggle" aria-label="Abrir menu" id="menuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <button type="button" class="points-badge" id="points-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span class="points-text"><span id="home-points">0</span> pts<br><small>NÍVEL <span id="home-level">1</span></small></span>
                     </button>
                 </div>
-            </div>
-        </header>
 
-        <!-- Conteúdo principal -->
-        <main class="app-main">
-            <div id="content" class="app-content">
-                <!-- Páginas serão renderizadas aqui -->
+                <div class="week-heatmap">
+                    <h2>Sua semana</h2>
+                    <div class="week-bars">
+                        <div class="day-bar" style="height: 30%;" title="Segunda"></div>
+                        <div class="day-bar" style="height: 10%;" title="Terça"></div>
+                        <div class="day-bar" style="height: 20%;" title="Quarta"></div>
+                        <div class="day-bar today" style="height: 80%;" title="Quinta"></div>
+                        <div class="day-bar" style="height: 15%;" title="Sexta"></div>
+                        <div class="day-bar" style="height: 70%;" title="Sábado"></div>
+                        <div class="day-bar" style="height: 50%;" title="Domingo"></div>
+                    </div>
+                    <div class="week-labels">
+                        <span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span><span>DOM</span>
+                    </div>
+                </div>
+
+                <div class="streak-indicator" id="streak-indicator">
+                    <span class="flame">🔥</span>
+                    <span id="streak-text">1 dia seguido</span>
+                </div>
+
+                <div class="calendar-section">
+                    <button class="nav-calendar" id="prev-week">&lsaquo;</button>
+                    <div class="calendar-display" id="calendar-display">
+                        <!-- Dias da semana renderizados via JS (renderCalendarWeek) -->
+                    </div>
+                    <button class="nav-calendar" id="next-week">&rsaquo;</button>
+                </div>
+
+                <button class="add-action-btn" id="add-action-btn">
+                    <span class="plus">+</span>
+                    Adicionar uma ação
+                    <small>Tarefas, hábitos, planos...</small>
+                </button>
+
+                <div class="today-section">
+                    <div class="today-title">
+                        <div class="today-title-label">
+                            <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM13 2h-2v3h2V2zm0 15h-2v3h2v-3zM5 11H2v2h3v-2zm15 0h-3v2h3v-2zM6.3 5.3L3.9 2.9 2.5 4.3l2.4 2.4 1.4-1.4zm12.4 12.4l-2.4 2.4 1.4 1.4 2.4-2.4-1.4-1.4zM19.8 4.3l-2.4-2.4-1.4 1.4 2.4 2.4 1.4-1.4zM6.4 17.9l-2.4 2.4 1.4 1.4 2.4-2.4-1.4-1.4z"/>
+                            </svg>
+                            Hoje
+                        </div>
+                        <button type="button" class="add-btn" id="edit-schedule-btn">📅 Editar semana</button>
+                    </div>
+
+                    <div id="today-items">
+                        <!-- Itens de hoje (hábitos, tarefas, consultas) renderizados aqui -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Habits Section -->
+            <section id="habits" class="section">
+                <div class="section-header">
+                    <h1>Meus Hábitos</h1>
+                    <button class="add-btn" id="add-habit-btn">+ Adicionar</button>
+                </div>
+
+                <!-- Global Habit Tracker -->
+                <div id="global-tracker" class="global-tracker">
+                    <div class="tracker-tabs">
+                        <button class="tracker-tab active" data-tracker-view="weekly">Semanal</button>
+                        <button class="tracker-tab" data-tracker-view="monthly">Mensal</button>
+                        <button class="tracker-tab" data-tracker-view="yearly">Anual</button>
+                    </div>
+                    <div id="tracker-content" class="tracker-content">
+                        <!-- Conteúdo do tracker será renderizado aqui -->
+                    </div>
+                </div>
+
+                <div id="habits-list" class="habits-list">
+                    <!-- Hábitos serão renderizados aqui -->
+                </div>
+
+                <!-- Modal para adicionar hábito -->
+                <div id="habit-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Novo Hábito</h2>
+                            <button class="close-btn" id="close-habit-modal">&times;</button>
+                        </div>
+                        <form id="habit-form">
+                            <div class="form-group">
+                                <label>Nome do hábito</label>
+                                <input type="text" id="habit-name" placeholder="Ex: Beber 2L de água" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" id="habit-description" placeholder="Ex: 8 copos por dia">
+                            </div>
+                            <div class="form-group">
+                                <label>Frequência</label>
+                                <select id="habit-frequency" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="daily">Diariamente</option>
+                                    <option value="weekly">Específicos dias da semana</option>
+                                    <option value="monthly">Dia específico do mês</option>
+                                </select>
+                            </div>
+
+                            <!-- Dias da semana (aparece se "Específicos dias da semana") -->
+                            <div class="form-group" id="weekly-days-group" style="display: none;">
+                                <label>Quais dias?</label>
+                                <div class="days-selector">
+                                    <label><input type="checkbox" class="day-checkbox" value="1"> Seg</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="2"> Ter</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="3"> Qua</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="4"> Qui</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="5"> Sex</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="6"> Sab</label>
+                                    <label><input type="checkbox" class="day-checkbox" value="0"> Dom</label>
+                                </div>
+                                <input type="hidden" id="habit-weekly-days" value="">
+                            </div>
+
+                            <!-- Dia do mês (aparece se "Dia específico do mês") -->
+                            <div class="form-group" id="monthly-day-group" style="display: none;">
+                                <label>Qual dia do mês?</label>
+                                <input type="number" id="habit-monthly-day" min="1" max="31" placeholder="1-31">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Horário (opcional)</label>
+                                <input type="time" id="habit-time">
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="habit-reminder">
+                                    Notificação no celular
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="habit-category">
+                                    <option value="pessoal">Pessoal</option>
+                                    <option value="profissional">Profissional</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Cor do hábito</label>
+                                <div class="color-picker">
+                                    <div class="color-option" style="background: #E0B0FF;" data-color="#E0B0FF" title="Rosa Claro"></div>
+                                    <div class="color-option" style="background: #2ecc71;" data-color="#2ecc71" title="Verde Forte"></div>
+                                    <div class="color-option" style="background: #654321;" data-color="#654321" title="Marrom"></div>
+                                    <div class="color-option" style="background: #E35336;" data-color="#E35336" title="Terracota"></div>
+                                    <div class="color-option" style="background: #87ceeb;" data-color="#87ceeb" title="Azul Claro"></div>
+                                    <div class="color-option" style="background: #ff1493;" data-color="#ff1493" title="Rosa Pink"></div>
+                                </div>
+                                <input type="hidden" id="habit-color" value="#E0B0FF">
+                            </div>
+                            <button type="submit" class="submit-btn">Criar Hábito</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section id="goals" class="section">
+                <div class="section-header">
+                    <h1>Minhas Metas</h1>
+                    <button class="add-btn" id="add-goal-btn">+ Adicionar</button>
+                </div>
+
+                <div id="goals-list" class="goals-list">
+                    <!-- Metas serão renderizadas aqui -->
+                </div>
+
+                <!-- Modal para adicionar meta -->
+                <div id="goal-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Nova Meta</h2>
+                            <button class="close-btn" id="close-goal-modal">&times;</button>
+                        </div>
+                        <form id="goal-form">
+                            <div class="form-group">
+                                <label>Nome da meta</label>
+                                <input type="text" id="goal-name" placeholder="Ex: 30 dias sem açúcar" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" id="goal-description" placeholder="Ex: Cortar doces e refrigerante">
+                            </div>
+                            <div class="form-group">
+                                <label>Data de início</label>
+                                <input type="date" id="goal-start-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Data de término</label>
+                                <input type="date" id="goal-end-date" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Criar Meta</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal para atualizar progresso -->
+                <div id="progress-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Atualizar Progresso</h2>
+                            <button class="close-btn" id="close-progress-modal">&times;</button>
+                        </div>
+                        <form id="progress-form">
+                            <div class="form-group">
+                                <label>Progresso: <span id="progress-value-label">0</span>%</label>
+                                <input type="range" id="progress-slider" min="0" max="100" value="0">
+                            </div>
+                            <button type="submit" class="submit-btn">Salvar Progresso</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section id="clinic" class="section">
+                <div class="section-header">
+                    <h1>Consultório</h1>
+                    <button class="add-btn" id="add-clinic-btn">+ Adicionar</button>
+                </div>
+
+                <div class="clinic-filters">
+                    <button type="button" class="filter-btn active" data-filter="upcoming">Próximas</button>
+                    <button type="button" class="filter-btn" data-filter="all">Todas</button>
+                </div>
+
+                <div id="clinic-list" class="clinic-list">
+                    <!-- Consultas serão renderizadas aqui -->
+                </div>
+
+                <!-- Modal para adicionar consulta -->
+                <div id="clinic-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Nova Consulta</h2>
+                            <button class="close-btn" id="close-clinic-modal">&times;</button>
+                        </div>
+                        <form id="clinic-form">
+                            <div class="form-group">
+                                <label>Nome do paciente</label>
+                                <input type="text" id="clinic-patient" placeholder="Ex: Maria Santos" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <input type="tel" id="clinic-phone" placeholder="Ex: (11) 99999-9999">
+                            </div>
+                            <div class="form-group">
+                                <label>Data</label>
+                                <input type="date" id="clinic-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Horário</label>
+                                <input type="time" id="clinic-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Observações</label>
+                                <input type="text" id="clinic-notes" placeholder="Ex: Retorno de acompanhamento nutricional">
+                            </div>
+                            <button type="submit" class="submit-btn">Agendar Consulta</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section id="tasks" class="section">
+                <div class="section-header">
+                    <h1>Tarefas</h1>
+                    <button class="add-btn" id="add-task-btn">+ Adicionar</button>
+                </div>
+
+                <div class="task-filters">
+                    <button type="button" class="task-filter-btn active" data-filter-type="category" data-value="todas">Todas</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="pessoal">Pessoal</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="trabalho">Trabalho</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="conteúdo">Conteúdo</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="treino">🏋️ Treino</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="estudos">📚 Estudos</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="casa">🏠 Casa</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="leitura">📖 Leitura</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="category" data-value="skincare">🧴 Skincare</button>
+                </div>
+
+                <div class="task-filters">
+                    <button type="button" class="task-filter-btn active" data-filter-type="priority" data-value="todas">Toda prioridade</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="priority" data-value="baixa">Baixa</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="priority" data-value="média">Média</button>
+                    <button type="button" class="task-filter-btn" data-filter-type="priority" data-value="alta">Alta</button>
+                </div>
+
+                <label class="pending-toggle">
+                    <input type="checkbox" id="tasks-only-pending">
+                    Mostrar só pendentes
+                </label>
+
+                <div id="tasks-list" class="tasks-list">
+                    <!-- Tarefas serão renderizadas aqui -->
+                </div>
+
+                <!-- Modal para adicionar tarefa -->
+                <div id="task-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Nova Tarefa</h2>
+                            <button class="close-btn" id="close-task-modal">&times;</button>
+                        </div>
+                        <form id="task-form">
+                            <div class="form-group">
+                                <label>Título</label>
+                                <input type="text" id="task-title" placeholder="Ex: Responder e-mails" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <input type="text" id="task-description" placeholder="Ex: Priorizar pacientes novos">
+                            </div>
+                            <div class="form-group">
+                                <label>Data</label>
+                                <input type="date" id="task-date">
+                            </div>
+                            <div class="form-group">
+                                <label>Horário</label>
+                                <input type="time" id="task-time">
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="task-category">
+                                    <option value="pessoal">Pessoal</option>
+                                    <option value="trabalho">Trabalho</option>
+                                    <option value="conteúdo">Conteúdo</option>
+                                    <option value="treino">🏋️ Treino</option>
+                                    <option value="estudos">📚 Estudos</option>
+                                    <option value="casa">🏠 Casa</option>
+                                    <option value="leitura">📖 Leitura</option>
+                                    <option value="skincare">🧴 Skincare</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Prioridade</label>
+                                <select id="task-priority">
+                                    <option value="baixa">Baixa</option>
+                                    <option value="média" selected>Média</option>
+                                    <option value="alta">Alta</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">Criar Tarefa</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section id="stories" class="section">
+                <div class="section-header">
+                    <h1>Roteiros</h1>
+                    <button class="add-btn" id="add-story-btn">+ Adicionar</button>
+                </div>
+
+                <!-- Abas -->
+                <div class="story-tabs-container">
+                    <button class="story-tab-btn active" data-tab="roteiros-tab">📝 Roteiros</button>
+                    <button class="story-tab-btn" data-tab="science-tab">🔬 Estudo Científico</button>
+                    <button class="story-tab-btn" data-tab="weekly-tab">📅 Roteiro Semanal</button>
+                </div>
+
+                <!-- TAB 1: Roteiros -->
+                <div id="roteiros-tab" class="story-tab-content active">
+                    <div class="story-suggestion-card" id="story-suggestion-card">
+                    <div class="story-suggestion-header">
+                        <span class="story-suggestion-label">✨ Roteiro sugerido de hoje</span>
+                        <button type="button" class="suggestion-regenerate-btn" id="regenerate-suggestion-btn" title="Gerar outra sugestão">↻</button>
+                    </div>
+                    <p class="story-suggestion-title" id="story-suggestion-title"></p>
+                    <p class="story-suggestion-preview" id="story-suggestion-preview"></p>
+                    <button type="button" class="submit-btn" id="use-suggestion-btn">Usar esse roteiro</button>
+                </div>
+
+                <div class="task-filters" id="story-category-filters">
+                    <button type="button" class="story-filter-btn active" data-filter-type="category" data-value="todas">Todas</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="category" data-value="Humanização">Humanização</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="category" data-value="Engajamento">Engajamento</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="category" data-value="Vendas">Vendas</button>
+                </div>
+
+                <div class="task-filters" id="story-platform-filters">
+                    <button type="button" class="story-filter-btn active" data-filter-type="platform" data-value="todas">Toda plataforma</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="platform" data-value="Instagram">Instagram</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="platform" data-value="TikTok">TikTok</button>
+                    <button type="button" class="story-filter-btn" data-filter-type="platform" data-value="YouTube">YouTube</button>
+                </div>
+
+                <div id="stories-list" class="tasks-list">
+                    <!-- Roteiros serão renderizados aqui -->
+                </div>
+                </div>
+                <!-- fim #roteiros-tab -->
+
+                <!-- TAB 2: Estudo Científico -->
+                <div id="science-tab" class="story-tab-content">
+                    <div id="science-list">
+                        <!-- Cards de estudos científicos serão renderizados aqui -->
+                    </div>
+                </div>
+
+                <!-- TAB 3: Roteiro Semanal -->
+                <div id="weekly-tab" class="story-tab-content">
+                    <div id="weekly-list">
+                        <!-- Cards de roteiros semanais serão renderizados aqui -->
+                    </div>
+                </div>
+
+                <!-- Modais (fora das abas) -->
+                <!-- Modal para adicionar roteiro -->
+                <div id="story-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Novo Roteiro</h2>
+                            <button class="close-btn" id="close-story-modal">&times;</button>
+                        </div>
+                        <form id="story-form">
+                            <div class="form-group">
+                                <label>Título</label>
+                                <input type="text" id="story-title" placeholder="Ex: A nutri que ninguém vê" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="story-category">
+                                    <option value="Humanização">Humanização</option>
+                                    <option value="Engajamento">Engajamento</option>
+                                    <option value="Vendas">Vendas</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Plataforma</label>
+                                <select id="story-platform">
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="TikTok">TikTok</option>
+                                    <option value="YouTube">YouTube</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Abertura</label>
+                                <textarea id="story-opening" placeholder="Como você começa o story..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Transições</label>
+                                <textarea id="story-transitions" placeholder="O meio do roteiro..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Encerramento</label>
+                                <textarea id="story-closing" placeholder="Como você fecha, chamada pra ação..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Criar Roteiro</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal de visualização do roteiro -->
+                <div id="story-view-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="story-view-title">Roteiro</h2>
+                            <button class="close-btn" id="close-story-view-modal">&times;</button>
+                        </div>
+                        <div class="story-view-meta">
+                            <span id="story-view-category" class="category-badge"></span>
+                            <span id="story-view-platform" class="category-badge"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="story-view-status">
+                                <option value="rascunho">Rascunho</option>
+                                <option value="pronto">Pronto</option>
+                                <option value="gravado">Gravado</option>
+                                <option value="postado">Postado</option>
+                            </select>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Abertura</p>
+                            <p id="story-view-opening" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Transições</p>
+                            <p id="story-view-transitions" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Encerramento</p>
+                            <p id="story-view-closing" class="story-view-text"></p>
+                        </div>
+                        <button type="button" class="submit-btn" id="copy-story-btn">Copiar roteiro</button>
+                    </div>
+                </div>
+
+                <!-- Modal de visualização de estudo científico -->
+                <div id="science-view-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="science-view-title">Estudo</h2>
+                            <button class="close-btn" id="close-science-view-modal">&times;</button>
+                        </div>
+                        <div class="science-badges">
+                            <span id="science-view-evidence" class="evidence-badge"></span>
+                            <span id="science-view-viral" class="viral-badge"></span>
+                        </div>
+                        <div class="science-view-meta">
+                            <p><strong>Periódico:</strong> <span id="science-view-journal"></span></p>
+                            <p><strong>Publicado:</strong> <span id="science-view-date"></span></p>
+                            <p><strong>Tipo:</strong> <span id="science-view-type"></span></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Resumo</p>
+                            <p id="science-view-resumo" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Resultados Práticos</p>
+                            <ul id="science-view-resultados" class="science-list"></ul>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Impacto Clínico</p>
+                            <p id="science-view-impacto" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Como Usar em Consulta</p>
+                            <p id="science-view-consulta" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Limitações</p>
+                            <p id="science-view-limitacoes" class="story-view-text"></p>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Gancho para Conteúdo</p>
+                            <div class="science-gancho">
+                                <div class="gancho-item">
+                                    <p class="gancho-label">Story/Reel Hook:</p>
+                                    <p id="science-view-hook" class="gancho-text"></p>
+                                </div>
+                                <div class="gancho-item">
+                                    <p class="gancho-label">Ideia para Story:</p>
+                                    <p id="science-view-story" class="gancho-text"></p>
+                                </div>
+                                <div class="gancho-item">
+                                    <p class="gancho-label">CTA:</p>
+                                    <p id="science-view-cta" class="gancho-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="science-links">
+                            <a id="science-view-pubmed" href="#" target="_blank" class="link-btn">PubMed</a>
+                            <a id="science-view-doi" href="#" target="_blank" class="link-btn">DOI</a>
+                            <button type="button" class="submit-btn" id="use-science-hook-btn">Usar gancho no roteiro</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal: Escolher categoria + dia para usar gancho -->
+                <div id="use-science-gancho-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Usar Gancho do Estudo</h2>
+                            <button class="close-btn" id="close-use-gancho-modal">&times;</button>
+                        </div>
+                        <div class="gancho-choice-section">
+                            <p class="gancho-choice-label">Qual categoria?</p>
+                            <div class="category-choice-buttons">
+                                <button type="button" class="category-choice-btn" data-category="Humanização">
+                                    <span class="category-choice-emoji">💚</span>
+                                    <span class="category-choice-name">Humanização</span>
+                                </button>
+                                <button type="button" class="category-choice-btn" data-category="Engajamento">
+                                    <span class="category-choice-emoji">🔥</span>
+                                    <span class="category-choice-name">Engajamento</span>
+                                </button>
+                                <button type="button" class="category-choice-btn" data-category="Vendas">
+                                    <span class="category-choice-emoji">💰</span>
+                                    <span class="category-choice-name">Vendas</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gancho-choice-section">
+                            <p class="gancho-choice-label">Para qual dia?</p>
+                            <div class="weekday-choice-buttons">
+                                <button type="button" class="weekday-choice-btn" data-weekday="0" data-day-name="Segunda">Seg</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="1" data-day-name="Terça">Ter</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="2" data-day-name="Quarta">Qua</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="3" data-day-name="Quinta">Qui</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="4" data-day-name="Sexta">Sex</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="5" data-day-name="Sábado">Sáb</button>
+                                <button type="button" class="weekday-choice-btn" data-weekday="6" data-day-name="Domingo">Dom</button>
+                            </div>
+                        </div>
+                        <div class="gancho-choice-actions">
+                            <button type="button" class="submit-btn" id="confirm-use-gancho-btn" disabled>Usar</button>
+                            <button type="button" class="cancel-btn" id="cancel-use-gancho-btn">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="ideas" class="section">
+                <div class="section-header">
+                    <h1>Banco de Ideias</h1>
+                    <div class="idea-header-actions">
+                        <button class="add-btn" id="generate-weekly-ideas-btn">✨ Gerar da semana</button>
+                        <button class="add-btn" id="add-idea-btn">+ Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="task-filters" id="idea-category-filters">
+                    <button type="button" class="idea-filter-btn active" data-filter-type="category" data-value="todas">Todas</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="category" data-value="Humanização">Humanização</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="category" data-value="Engajamento">Engajamento</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="category" data-value="Vendas">Vendas</button>
+                </div>
+
+                <div class="task-filters" id="idea-status-filters">
+                    <button type="button" class="idea-filter-btn active" data-filter-type="status" data-value="todas">Todo status</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="status" data-value="ideia">Ideia</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="status" data-value="rascunho">Rascunho</button>
+                    <button type="button" class="idea-filter-btn" data-filter-type="status" data-value="desenvolvimento">Em desenvolvimento</button>
+                </div>
+
+                <div id="ideas-list" class="tasks-list">
+                    <!-- Ideias serão renderizadas aqui -->
+                </div>
+
+                <!-- Modal para adicionar ideia -->
+                <div id="idea-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Nova Ideia</h2>
+                            <button class="close-btn" id="close-idea-modal">&times;</button>
+                        </div>
+                        <form id="idea-form">
+                            <div class="form-group">
+                                <label>Título</label>
+                                <input type="text" id="idea-title" placeholder="Ex: Série de posts sobre café da manhã" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea id="idea-description" placeholder="Solta a ideia aqui, sem compromisso..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select id="idea-category">
+                                    <option value="Humanização" selected>Humanização</option>
+                                    <option value="Engajamento">Engajamento</option>
+                                    <option value="Vendas">Vendas</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">Salvar Ideia</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal de visualização/conversão da ideia -->
+                <div id="idea-view-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="idea-view-title">Ideia</h2>
+                            <button class="close-btn" id="close-idea-view-modal">&times;</button>
+                        </div>
+                        <div class="story-view-meta">
+                            <span id="idea-view-category" class="category-badge"></span>
+                            <span id="idea-view-date" class="task-datetime"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="idea-view-status">
+                                <option value="ideia">Ideia</option>
+                                <option value="rascunho">Rascunho</option>
+                                <option value="desenvolvimento">Em desenvolvimento</option>
+                            </select>
+                        </div>
+                        <div class="story-view-section">
+                            <p class="story-view-label">Descrição</p>
+                            <p id="idea-view-description" class="story-view-text"></p>
+                        </div>
+                        <div class="idea-convert-actions">
+                            <button type="button" class="submit-btn" id="convert-idea-task-btn">Converter em Tarefa</button>
+                            <button type="button" class="submit-btn" id="convert-idea-story-btn">Converter em Roteiro</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Journal Section (Humor/Check-in + Diário) -->
+            <section id="journal" class="section">
+                <div class="section-header">
+                    <h1>Humor & Diário</h1>
+                </div>
+
+                <div class="mood-checkin-card">
+                    <p class="mood-checkin-label">Como você tá hoje?</p>
+                    <div class="mood-emoji-row" id="mood-emoji-row">
+                        <!-- Botões de emoji renderizados via JS -->
+                    </div>
+                    <input type="text" id="mood-note" placeholder="Quer registrar algo sobre hoje? (opcional)">
+                    <button type="button" class="submit-btn" id="save-mood-btn">Salvar humor de hoje</button>
+                </div>
+
+                <div class="mood-week-section">
+                    <p class="mood-week-label">Retrospectiva da semana</p>
+                    <div class="mood-week-row" id="mood-week-row">
+                        <!-- Semana renderizada via JS -->
+                    </div>
+                </div>
+
+                <div class="journal-section">
+                    <div class="section-header">
+                        <h2>Diário</h2>
+                    </div>
+                    <form id="journal-form" class="journal-form">
+                        <input type="date" id="journal-date" required>
+                        <textarea id="journal-text" placeholder="Escreva livremente sobre o seu dia..." required></textarea>
+                        <button type="submit" class="submit-btn">Salvar no diário</button>
+                    </form>
+
+                    <input type="text" id="journal-search" class="journal-search" placeholder="🔍 Buscar no diário...">
+
+                    <div id="journal-list" class="journal-list">
+                        <!-- Entradas do diário renderizadas aqui -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal de gamificação: pontos, nível e por que ganhou cada ponto (usado pelo badge da Home) -->
+            <div id="gamification-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Minha Evolução</h2>
+                        <button class="close-btn" id="close-gamification-modal">&times;</button>
+                    </div>
+
+                    <div class="gamification-summary">
+                        <div class="gamification-level-circle">
+                            <span id="gam-level-number">1</span>
+                        </div>
+                        <div class="gamification-summary-text">
+                            <p class="gamification-level-title" id="gam-level-title">Iniciante</p>
+                            <p class="gamification-level-label">Nível <span id="gam-level-text">1</span> · <span id="gam-points-text">0</span> pontos</p>
+                        </div>
+                    </div>
+
+                    <div class="gamification-progress">
+                        <div class="goal-progress-bar">
+                            <div class="goal-progress-fill" id="gam-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <p class="gamification-next-level" id="gam-next-level-text">Faltam 100 pontos pro Nível 2</p>
+                    </div>
+
+                    <div class="story-view-section">
+                        <p class="story-view-label">Por que você está ganhando pontos</p>
+                        <div id="gam-history-list" class="gamification-history-list">
+                            <!-- Histórico renderizado via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal escolher tipo de ação (usado pelo botão "+ Adicionar" da Home) -->
+            <div id="action-choice-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>O que você quer adicionar?</h2>
+                        <button class="close-btn" id="close-action-choice-modal">&times;</button>
+                    </div>
+                    <div class="action-choice-list">
+                        <button type="button" class="action-choice-btn" data-choice="habit">
+                            <span class="action-choice-icon">🌱</span>
+                            <span>Hábito</span>
+                        </button>
+                        <button type="button" class="action-choice-btn" data-choice="task">
+                            <span class="action-choice-icon">✅</span>
+                            <span>Tarefa</span>
+                        </button>
+                        <button type="button" class="action-choice-btn" data-choice="clinic">
+                            <span class="action-choice-icon">🩺</span>
+                            <span>Consulta</span>
+                        </button>
+                        <button type="button" class="action-choice-btn" data-choice="goal">
+                            <span class="action-choice-icon">🎯</span>
+                            <span>Meta</span>
+                        </button>
+                        <button type="button" class="action-choice-btn" data-choice="story">
+                            <span class="action-choice-icon">🎬</span>
+                            <span>Roteiro</span>
+                        </button>
+                        <button type="button" class="action-choice-btn" data-choice="routine">
+                            <span class="action-choice-icon">🤖</span>
+                            <span>Plano de Rotina (IA)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal editar agenda da semana inteira (todos os dias de uma vez) -->
+            <div id="schedule-edit-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Editar agenda da semana</h2>
+                        <button class="close-btn" id="close-schedule-edit-modal">&times;</button>
+                    </div>
+                    <div id="schedule-edit-days">
+                        <!-- Um grupo por dia da semana (Seg a Dom), gerado via JS -->
+                    </div>
+                    <button type="button" class="submit-btn" id="save-schedule-btn">Salvar agenda</button>
+                </div>
+            </div>
+
+            <!-- Modal do Plano de Rotina com IA -->
+            <div id="routine-plan-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Plano de Rotina com IA</h2>
+                        <button class="close-btn" id="close-routine-plan-modal">&times;</button>
+                    </div>
+                    <p class="routine-plan-intro">Escolha as áreas que você quer organizar essa semana. A IA sugere tarefas pra cada uma e elas já aparecem na sua Home todo dia.</p>
+                    <form id="routine-plan-form">
+                        <div class="routine-area-row" data-area="treino">
+                            <label class="routine-area-check">
+                                <input type="checkbox" class="routine-area-toggle" data-area="treino">
+                                <span>🏋️ Treino</span>
+                            </label>
+                            <select class="routine-area-frequency" data-area="treino" disabled>
+                                <option value="diária">Todo dia</option>
+                                <option value="3x" selected>3x na semana</option>
+                                <option value="1x">1x na semana</option>
+                            </select>
+                            <input type="text" class="routine-area-focus" data-area="treino" placeholder="Foco (opcional) — ex: Musculação" disabled>
+                        </div>
+                        <div class="routine-area-row" data-area="estudos">
+                            <label class="routine-area-check">
+                                <input type="checkbox" class="routine-area-toggle" data-area="estudos">
+                                <span>📚 Estudos</span>
+                            </label>
+                            <select class="routine-area-frequency" data-area="estudos" disabled>
+                                <option value="diária">Todo dia</option>
+                                <option value="3x" selected>3x na semana</option>
+                                <option value="1x">1x na semana</option>
+                            </select>
+                            <input type="text" class="routine-area-focus" data-area="estudos" placeholder="Foco (opcional) — ex: Inglês" disabled>
+                        </div>
+                        <div class="routine-area-row" data-area="casa">
+                            <label class="routine-area-check">
+                                <input type="checkbox" class="routine-area-toggle" data-area="casa">
+                                <span>🏠 Casa</span>
+                            </label>
+                            <select class="routine-area-frequency" data-area="casa" disabled>
+                                <option value="diária">Todo dia</option>
+                                <option value="3x" selected>3x na semana</option>
+                                <option value="1x">1x na semana</option>
+                            </select>
+                            <input type="text" class="routine-area-focus" data-area="casa" placeholder="Foco (opcional) — ex: Cozinha" disabled>
+                        </div>
+                        <div class="routine-area-row" data-area="leitura">
+                            <label class="routine-area-check">
+                                <input type="checkbox" class="routine-area-toggle" data-area="leitura">
+                                <span>📖 Leitura</span>
+                            </label>
+                            <select class="routine-area-frequency" data-area="leitura" disabled>
+                                <option value="diária">Todo dia</option>
+                                <option value="3x" selected>3x na semana</option>
+                                <option value="1x">1x na semana</option>
+                            </select>
+                            <input type="text" class="routine-area-focus" data-area="leitura" placeholder="Foco (opcional) — ex: Livro atual" disabled>
+                        </div>
+                        <div class="routine-area-row" data-area="skincare">
+                            <label class="routine-area-check">
+                                <input type="checkbox" class="routine-area-toggle" data-area="skincare">
+                                <span>🧴 Skincare</span>
+                            </label>
+                            <select class="routine-area-frequency" data-area="skincare" disabled>
+                                <option value="diária" selected>Todo dia</option>
+                                <option value="3x">3x na semana</option>
+                                <option value="1x">1x na semana</option>
+                            </select>
+                            <input type="text" class="routine-area-focus" data-area="skincare" placeholder="Foco (opcional)" disabled>
+                        </div>
+                        <button type="submit" class="submit-btn">Gerar plano da semana</button>
+                        <p class="routine-plan-confirmation hidden" id="routine-plan-confirmation"></p>
+                    </form>
+                </div>
             </div>
         </main>
-
-        <!-- Navigation Footer -->
-        <nav class="app-nav" id="navMenu">
-            <ul class="nav-list">
-                <li><a href="#" data-page="home" class="nav-link active">
-                    <span class="nav-icon">📅</span>
-                    <span class="nav-label">Home</span>
-                </a></li>
-                <li><a href="#" data-page="tasks" class="nav-link">
-                    <span class="nav-icon">✅</span>
-                    <span class="nav-label">Tarefas</span>
-                </a></li>
-                <li><a href="#" data-page="ideas" class="nav-link">
-                    <span class="nav-icon">💭</span>
-                    <span class="nav-label">Ideias</span>
-                </a></li>
-                <li><a href="#" data-page="planning" class="nav-link">
-                    <span class="nav-icon">🌙</span>
-                    <span class="nav-label">Planejar</span>
-                </a></li>
-                <li><a href="#" data-page="stories" class="nav-link">
-                    <span class="nav-icon">✨</span>
-                    <span class="nav-label">Stories</span>
-                </a></li>
-                <li><a href="#" data-page="feedback" class="nav-link">
-                    <span class="nav-icon">💭</span>
-                    <span class="nav-label">Feedback</span>
-                </a></li>
-                <li><a href="#" data-page="week" class="nav-link">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-label">Semana</span>
-                </a></li>
-                <li><a href="#" data-page="heatmap" class="nav-link">
-                    <span class="nav-icon">🔥</span>
-                    <span class="nav-label">Heatmap</span>
-                </a></li>
-                <li><a href="#" data-page="feed" class="nav-link">
-                    <span class="nav-icon">🔥</span>
-                    <span class="nav-label">Feed</span>
-                </a></li>
-                <li><a href="#" data-page="lifestyle" class="nav-link">
-                    <span class="nav-icon">🎬</span>
-                    <span class="nav-label">Lifestyle</span>
-                </a></li>
-            </ul>
-        </nav>
     </div>
 
-    <!-- Template da Home -->
-    <template id="home-template">
-        <div class="page page-home">
-            <div class="greeting-section">
-                <h2 class="greeting-title">Seu dia hoje</h2>
-                <p class="date-display" id="dateDisplay">📅 24 de julho</p>
-            </div>
-
-            <!-- Seção Agenda -->
-            <section class="home-card agenda-card">
-                <div class="card-header">
-                    <h3>📅 Agenda</h3>
-                </div>
-                <div class="card-content" id="agenda-content">
-                    <div class="placeholder-text">Carregando agenda...</div>
-                </div>
-            </section>
-
-            <!-- Seção Tarefas -->
-            <section class="home-card tasks-card">
-                <div class="card-header">
-                    <h3>✅ Tarefas</h3>
-                </div>
-                <div class="card-content" id="tasks-content">
-                    <div class="placeholder-text">Tá tudo em dia por agora 💖</div>
-                </div>
-            </section>
-
-            <!-- Seção Roteiro de Stories -->
-            <section class="home-card stories-card">
-                <div class="card-header">
-                    <h3>✨ Roteiro de Stories</h3>
-                </div>
-                <div class="card-content" id="roteiro-content">
-                    <div class="placeholder-text">Ah, esqueceu de planejar ontem? Bora planejá-lo agora 😊</div>
-                </div>
-            </section>
-        </div>
-    </template>
-
-    <!-- Template do Banco de Tarefas -->
-    <template id="tasks-page-template">
-        <div class="page page-tasks">
-            <div class="page-header">
-                <h2>✅ Banco de Tarefas</h2>
-                <p class="page-subtitle">Organize todas as suas tarefas por aqui</p>
-            </div>
-
-            <!-- Form pra adicionar tarefa -->
-            <div class="task-form-card">
-                <textarea 
-                    id="newTaskInput" 
-                    class="task-input" 
-                    placeholder="Adicionar tarefa... 📝"
-                    rows="3"
-                ></textarea>
-                <div class="task-form-controls">
-                    <input 
-                        type="date" 
-                        id="newTaskDate" 
-                        class="task-form-date"
-                    />
-                    <button id="addTaskBtn" class="btn btn-primary">
-                        ➕ Adicionar
-                    </button>
-                </div>
-            </div>
-
-            <!-- Lista de tarefas -->
-            <div id="tasks-list-container">
-                <div class="placeholder-text">Carregando tarefas...</div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template do Banco de Ideias -->
-    <template id="ideas-page-template">
-        <div class="page page-ideas">
-            <div class="page-header">
-                <h2>💭 Banco de Ideias</h2>
-                <p class="page-subtitle">Capture ideias soltas de conteúdo</p>
-            </div>
-
-            <!-- Form pra adicionar ideia -->
-            <div class="idea-form-card">
-                <textarea
-                    id="newIdeaInput"
-                    class="idea-input"
-                    placeholder="Ideia rápida... 💭&#10;(ex: 'falar sobre paciente que parou com medo de engordar depois')"
-                    rows="5"
-                ></textarea>
-                <button id="addIdeaBtn" class="btn btn-primary btn-large">
-                    💾 Salvar ideia
-                </button>
-            </div>
-
-            <!-- Lista de ideias -->
-            <div id="ideas-list-container">
-                <div class="placeholder-text">Nenhuma ideia cadastrada ainda. Comece a capturar! 💡</div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Planejamento Noturno -->
-    <template id="planning-page-template">
-        <div class="page page-planning">
-            <div class="page-header">
-                <h2>🌙 Planejamento Noturno</h2>
-                <p class="page-subtitle">Registre como vai ser seu dia de amanhã</p>
-            </div>
-
-            <div class="planning-form-card">
-                <div class="form-group">
-                    <label for="planningLocal">📍 Onde você vai estar?</label>
-                    <select id="planningLocal" class="form-select">
-                        <option value="">Escolha um local...</option>
-                        <option value="viamao">Viamão</option>
-                        <option value="poa">Porto Alegre</option>
-                        <option value="casa">Casa</option>
-                        <option value="consultorio">Consultório</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="planningConsultas">👩‍⚕️ Quantas consultas tem?</label>
-                    <div class="number-input-group">
-                        <button class="number-btn" id="minusBtn">−</button>
-                        <input type="number" id="planningConsultas" class="number-input" min="0" max="10" value="0" />
-                        <button class="number-btn" id="plusBtn">+</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="planningExerciseTime">🚴 Que horas você vai fazer exercício amanhã?</label>
-                    <input type="time" id="planningExerciseTime" class="form-select" />
-                </div>
-
-                <div class="form-group">
-                    <label for="planningType">🎬 Que tipo de dia vai ser?</label>
-                    <select id="planningType" class="form-select">
-                        <option value="conexao">🤝 Conexão (Humanização)</option>
-                        <option value="venda">💰 Venda (Conversão)</option>
-                        <option value="identificacao">🔍 Identificação (Problema)</option>
-                        <option value="ensinamento">📚 Ensinamento (Educação)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="planningTheme">💡 Tema do dia (opcional)</label>
-                    <input type="text" id="planningTheme" class="form-select" placeholder="Ex: Fibra alimentar, Emagrecimento saudável, etc" />
-                </div>
-
-                <div class="form-group">
-                    <label for="planningNotes">📝 Observações (opcional)</label>
-                    <textarea id="planningNotes" class="planning-textarea" placeholder="Algo especial pra amanhã?" rows="3"></textarea>
-                </div>
-
-                <button id="planBtn" class="btn btn-primary btn-large">
-                    ✨ Planejar amanhã
-                </button>
-            </div>
-
-            <div id="planning-success-message" class="success-message" style="display: none;">
-                <p>Seu roteiro tá pronto pra amanhã! 💖 Durma bem. ✨</p>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Roteiro de Stories -->
-    <template id="stories-page-template">
-        <div class="page page-stories">
-            <div class="page-header">
-                <h2>✨ Seu Roteiro de Stories</h2>
-                <p class="page-subtitle" id="storiesSubtitle">Pronto pra arrasar hoje!</p>
-            </div>
-
-            <div id="stories-container">
-                <div class="placeholder-text">Nenhum roteiro gerado ainda. Planeje seu dia à noite! 🌙</div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Feed de Novidades -->
-    <template id="feed-page-template">
-        <div class="page page-feed">
-            <div class="page-header">
-                <h2>🔥 Feed de Novidades</h2>
-                <p class="page-subtitle">Assuntos trending em nutrição prontos pra virar story</p>
-            </div>
-
-            <div id="feed-container">
-                <div class="placeholder-text">Carregando novidades...</div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Rascunho de Conteúdo -->
-    <template id="draft-page-template">
-        <div class="page page-draft">
-            <div class="page-header">
-                <h2>📝 Rascunho de Conteúdo</h2>
-                <p class="page-subtitle" id="draftSubtitle">Edite e personalize seu roteiro</p>
-            </div>
-
-            <div id="draft-content">
-                <!-- Conteúdo dinâmico -->
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Meus Rascunhos -->
-    <template id="drafts-list-template">
-        <div class="page page-drafts">
-            <div class="page-header">
-                <h2>📚 Meus Rascunhos</h2>
-                <p class="page-subtitle">Conteúdos prontos pra customizar e publicar</p>
-            </div>
-
-            <div id="drafts-list-container">
-                <!-- Lista dinâmica de rascunhos -->
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Semana -->
-    <template id="week-page-template">
-        <div class="page page-week">
-            <div class="page-header">
-                <h2>📊 Sua Semana</h2>
-                <p class="page-subtitle">Acompanhe sua consistência</p>
-            </div>
-
-            <div class="week-navigation">
-                <button id="week-prev" class="week-nav-btn">← Semana anterior</button>
-                <span id="week-range" class="week-range"></span>
-                <button id="week-next" class="week-nav-btn">Próxima semana →</button>
-            </div>
-
-            <div id="week-grid" class="week-grid">
-                <!-- Grid de dias será renderizado aqui -->
-            </div>
-
-            <div class="week-legend">
-                <div class="legend-item">
-                    <span class="legend-dot" style="background: #e88ba3;"></span>
-                    <span>Postei stories</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background: #a8d5a8;"></span>
-                    <span>Treinei</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background: #a8c5d5;"></span>
-                    <span>Cumpri tarefas</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot" style="background: #e0e0e0;"></span>
-                    <span>Sem atividades</span>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Heatmap -->
-    <template id="heatmap-page-template">
-        <div class="page page-heatmap">
-            <div class="page-header">
-                <h2>🔥 Seu Heatmap Anual</h2>
-                <p class="page-subtitle">Acompanhe sua consistência ao longo do ano</p>
-            </div>
-
-            <div id="heatmap-container">
-                <!-- Heatmap será renderizado aqui -->
-            </div>
-
-            <div class="heatmap-legend">
-                <div class="legend-item">
-                    <span class="legend-square" style="background: #f0f0f0;"></span>
-                    <span>Nenhuma</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-square" style="background: #f5d5de;"></span>
-                    <span>1 atividade</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-square" style="background: #eb9bb1;"></span>
-                    <span>2 atividades</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-square" style="background: #e88ba3;"></span>
-                    <span>3+ atividades</span>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- Template Feedback -->
-    <template id="feedback-page-template">
-        <div class="page page-feedback">
-            <div class="page-header">
-                <h2>💭 Como foi seu dia?</h2>
-                <p class="page-subtitle">Registre seu humor e feedback de cada atividade</p>
-            </div>
-
-            <!-- Seletor de Humor -->
-            <div class="mood-selector-card">
-                <h3>🎯 Como você se sente hoje?</h3>
-                <div id="mood-selector" class="mood-selector">
-                    <button class="mood-btn" data-mood="1" title="Péssimo">😞<span>Péssimo</span></button>
-                    <button class="mood-btn" data-mood="2" title="Ruim">😐<span>Ruim</span></button>
-                    <button class="mood-btn" data-mood="3" title="Neutro">😊<span>Neutro</span></button>
-                    <button class="mood-btn" data-mood="4" title="Bom">😄<span>Bom</span></button>
-                    <button class="mood-btn" data-mood="5" title="Ótimo">🤩<span>Ótimo</span></button>
-                </div>
-            </div>
-
-            <div id="feedback-content">
-                <!-- Atividades e feedback serão renderizadas aqui -->
-            </div>
-        </div>
-    </template>
-
-    <!-- Template das páginas vazias -->
-    <template id="page-template">
-        <div class="page">
-            <div class="page-header">
-                <h2 id="pageTitle">Página</h2>
-            </div>
-            <div class="empty-message">
-                <p>Em breve por aqui 🚀</p>
-            </div>
-        </div>
-    </template>
-
-    <!-- Supabase via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.47.0"></script>
-
-    <!-- Arquivos do app -->
-    <script src="/supabase-client.js"></script>
-    <script src="/notifications.js"></script>
-    <script src="/auth-ui.js"></script>
-    <script src="/app-novo.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

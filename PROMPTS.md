@@ -1,361 +1,387 @@
-# 📝 PROMPTS — NutriRotina (prontos pra copiar e colar)
+# 📋 PROMPTS.md — NutriRotina
 
-Cada prompt abaixo é **completo e independente**. Se você fechar a conversa e voltar depois, é só colar o prompt da fase onde parou.
+Cada seção abaixo é um prompt pronto. Se você fechar o app e voltar outro dia, é só colar o prompt da fase onde parou.
 
 ---
 
-## Prompt — Fase 0: Setup + Preview duplo
+## Prompt — Fase 0: Setup + Preview duplo + Identidade visual
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina.
-
-Estou construindo o NutriRotina, um app pessoal de planner pra nutricionista que organiza rotina diária, integra Google Calendar, sugere roteiro de stories e aprende ao longo do tempo.
-
-Vamos construir SÓ a Fase 0 agora: setup e preview duplo.
+Leia o arquivo PLANO.md. Estou criando o app **NutriRotina**: um app que organiza rotina pessoal, consultório e conteúdo de redes sociais em um só lugar.
 
 Nesta fase você vai:
+1. Criar a estrutura HTML/CSS/JS do projeto
+2. Aplicar a identidade visual: paleta (Rosa quente `#e88ba3` + Verde menta `#7ec8c8` + Cinza claro `#f0f0f0` + Preto `#2a2a2a`), tipografia (Poppins + Inter)
+3. Criar uma página de **preview duplo** (`preview.html`) que mostra o app **duas vezes lado a lado**:
+   - À esquerda: **moldura de celular** (390px de largura, com aparência de telefone)
+   - À direita: **largura de computador** (desktop)
+   - **Ambas apontam pra mesma URL do app rodando** (dois `<iframe>` do localhost)
+   - **O app dentro dos iframes é o app de verdade, clicável e funcionando** (não são imagens estáticas)
 
-1. **Criar a estrutura HTML/CSS/JS** do projeto (ou usando React/Vue se preferir — mas quer dizer que precisa de um dev server). Mobile-first.
+O critério de pronto é:
+- [ ] Projeto rodando no navegador (http://localhost:algo)
+- [ ] Paleta + fonte aplicadas (rosa, verde, cinza, preto, Poppins + Inter)
+- [ ] Página `preview.html` aberta mostra o app em **dois tamanhos ao mesmo tempo**: celular à esquerda, desktop à direita
+- [ ] Clico em ambos e o app funciona (não é mockup, é o app real)
+- [ ] Fechar e abrir de novo: as mudanças aparecem nos dois iframes automaticamente (não precisa recarregar manualmente)
 
-2. **Aplicar a identidade visual:**
-   - Paleta: rosa `#e88ba3` (destaque) + cinza `#6b6b6b` (texto) + branco `#ffffff` (fundo) + cinza claro `#e0e0e0` (bordas)
-   - Fonte: Plus Jakarta Sans (headings) + Inter (corpo), ambas do Google Fonts
-   - Vibe: clean, acessível, minimalista tipo Sunsama
-   - Espaçamento: generoso, respira bem
-
-3. **Criar uma tela de preview duplo** (`preview.html` ou equivalente):
-   - Dois iframes lado a lado
-   - À esquerda: moldura de celular (~390px de largura, com visual de telefone, com home button/notch fake, etc.)
-   - À direita: moldura de computador (largura maior, tipo 1200px)
-   - Ambos os iframes apontam pro **MESMO app rodando** no localhost (ex.: `http://localhost:3000` se React, ou `http://localhost:5500` se estático com Live Server)
-   - **Importante:** os iframes carregam o app de verdade e clicável nos dois tamanhos. Quando você edita o app, ambas as telas atualizam automaticamente (hot reload).
-   - O preview tem um layout bonito, talvez um título "NutriRotina — Preview" e as duas telas bem alinhadas
-
-4. **A primeira página do app** (que vai dentro dos iframes) pode ser bem simples nessa fase:
-   - Uma Home básica, mobile-first
-   - Header com o nome "NutriRotina" e um ícone/logo (pode ser um emoji mesmo, tipo 📅 ou 🌿)
-   - Um espaço pro conteúdo (vazio agora, mas estruturado pra receber telas depois)
-   - Um menu/navegação simples pra navegar entre as telas (Home, Tarefas, Ideias, Planejamento, etc.) — pode ser ícones em um footer, ou um menu hambúrguer mobile, o que achar melhor
-   - Usar localStorage pra guardar preferências (como tema, se houver)
-
-5. **Configurar tudo pra funcionar**:
-   - Se for HTML puro: sobe num dev server simples (Live Server do VS Code, ou `npx http-server`)
-   - Se for React/Vue: `npm run dev` ou equivalente
-   - Certifique-se que os iframes conseguem carregar o localhost sem erros CORS
-
-6. **Configurar tom de voz:** Textos que o app gera (labels, botões, mensagens) usam linguagem simples, direto, próximo, "tu", com emojis equilibrados (💖 ✨ 💫 🌿). Exemplos: "Cê tá no controle 💖", "Bora organizar seu dia?", "Adicionar ideia rápido ✨"
-
-Não faça ainda:
-- Não integrar de verdade com Google Calendar (dados fake/mock tá ótimo nessa fase)
-- Não adicionar lógica de Tarefas, Ideias, Planejamento ou Roteiro (só a tela vazia mesmo)
-- Não usar banco de dados (localStorage tá ótimo)
-- Não instalar pacotes além do essencial
-
-Está pronto quando:
-- [ ] Abro o `preview.html`, vejo o app em duas telas lado a lado (celular à esquerda, computador à direita)
-- [ ] Consigo clicar nos dois e ambas as telas respondem (é o mesmo app)
-- [ ] A identidade visual tá aplicada (rosa, cinza, branco, fonte correta)
-- [ ] Se editar um arquivo, ambas as telas atualizam automaticamente
-- [ ] A navegação entre telas funciona nos dois tamanhos igualmente bem
-```
+**Não faça ainda:** home, hábitos, metas, nenhuma funcionalidade. Só estrutura e styling.
 
 ---
 
-## Prompt — Fase 1: Home (dia de hoje)
+## Prompt — Fase 1: Home (Painel) 
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina. Estou construindo o NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí a Fase 0 (setup + preview duplo).
 
-Já concluí a Fase 0 (setup + preview duplo). Agora vamos construir a Fase 1: a tela Home (dia de hoje).
+Agora vou construir **SÓ a Fase 1: Home (Painel)**.
 
 Nesta fase:
-- Criar a tela **Home**, que é a primeira tela que abre quando alguém entra no app
-- A Home mostra **tudo de uma vez:** agenda do dia (Google Calendar), tarefas do dia (do banco de tarefas), e espaço reservado pro roteiro de stories
+- **Topo:** Saudação ("Boa [período], [nome]"), indicador de pontos/streak (estrutura pronta, sem funcionalidade real ainda)
+- **Calendário semanal:** Barra de dias (seg a dom), indicador visual de qual é hoje, setinhas pra navegar semana anterior/próxima
+- **Lista "Hoje":** Seção mostrando:
+  - Hábitos do dia (checkbox, nome do hábito)
+  - Tarefas pendentes (título, horário se tem)
+  - Consultório: consultas agendadas (paciente, horário)
+  - Ideias marcadas pra hoje
+- **Botão flutuante:** "+ Adicionar ação" que abre modal/tela pra criar hábito, tarefa, consulta ou ideia (não precisa fazer salvar real ainda, só estrutura)
+- **Bottom bar:** Navegação com ícones (Home, Hábitos, Metas, Consultório, Tarefas, Roteiros, Ideias) — **só Home ativa agora**, os outros aparecem como botões desabilitados/cinzas
 
-Estrutura da Home:
-1. **Header:** "Seu dia hoje, 📅 [data de hoje]" (ou algo assim, no tom da marca)
-2. **Seção Agenda (Google Calendar):**
-   - Lista as consultas/eventos do dia (dados fake primeiro, tipo 3 eventos fixos pra testar)
-   - Cada evento mostra: horário, título, local/descrição
-   - Ícones visuais pra diferenciar (ícone de consulta, ícone de treino, etc.)
-3. **Seção Tarefas:**
-   - Lista as tarefas do dia (vindas do banco de tarefas que vamos construir na Fase 2)
-   - Cada tarefa mostra: checkbox (pra marcar como feita), título, status
-   - Se não houver tarefas, mensagem tipo "Tá tudo em dia por agora 💖"
-4. **Seção Roteiro de Stories:**
-   - Espaço reservado (pode ser um placeholder tipo "Seu roteiro de stories vai aparecer aqui de manhã ✨")
-   - Logo vai receber o roteiro gerado na Fase 4
+Identidade visual: Rosa quente `#e88ba3`, Verde menta `#7ec8c8`, Cinza claro `#f0f0f0`, Preto `#2a2a2a`, Poppins + Inter. Mobile-first.
 
-Design:
-- Mobile-first, uma coluna só
-- Separação clara entre as 3 seções (Cards? Dividers? O que combinar com a identidade)
-- Paleta rosa + cinza + branco
-- Toque no tom de voz: "Seu dia hoje", "Bora lá", emojis nos lugares certos
+Não faça ainda: Salvar dados de verdade, conectar hábitos/tarefas reais. Fase 1 é só a tela aparecer bonita e responsiva.
 
-Não faça ainda:
-- Não integrar de verdade com Google Calendar (dados mock/fake tá ótimo)
-- Não implementar lógica de Tarefas ainda (vai vir na Fase 2, aqui é só espaço vazio ou mock)
-- Não tentar gerar o roteiro de stories (vai ser na Fase 4)
+Vá me explicando o que está fazendo em linguagem simples.
 
 Está pronto quando:
-- [ ] Abro a Home e vejo as 3 seções bem definidas (agenda, tarefas, roteiro)
-- [ ] Os dados fake aparecem e tão legíveis
-- [ ] No celular e no computador (preview duplo) tá bonito e funciona bem
-- [ ] O tom de voz da marca tá consistente (linguagem simples, "tu", emojis)
-```
+- [ ] Abro o preview duplo e vejo a home nos dois tamanhos (celular e desktop)
+- [ ] Calendário mostra os dias, consigo navegar pra semana anterior/próxima
+- [ ] "Hoje" aparece com alguns dados fake (1-2 hábitos, 1-2 tarefas, exemplo de consulta)
+- [ ] Bottom bar aparece com 7 abas (só Home ativa)
+- [ ] Clico em "+ Adicionar ação" e abre um modal/tela
 
 ---
 
-## Prompt — Fase 2: Banco de tarefas
+## Prompt — Fase 2: Hábitos com heatmap
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina. Estou construindo o NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0 e 1 (setup + home).
 
-Já concluí as Fases 0 e 1 (setup + Home). Agora vamos construir a Fase 2: o banco de tarefas.
+Agora vou construir **SÓ a Fase 2: Hábitos com heatmap**.
 
 Nesta fase:
-- Criar uma tela **Banco de Tarefas** onde a pessoa adiciona tarefas ao longo do dia
-- As tarefas do dia aparecem automaticamente na Home
-- Tarefas sem data fica visíveis até serem marcadas como feitas
+- **Página de Hábitos:** Clico na aba "Hábitos" e vejo lista de hábitos
+- **Cada hábito mostra:**
+  - Nome do hábito
+  - Cor própria (diferente pra cada um)
+  - Checkbox de hoje (marca como concluído ou não)
+  - **Heatmap visual:** grid de dias (últimos 30 dias) mostrando quais dias você fez/não fez o hábito (quadrinhos coloridos tipo GitHub)
+  - **Streak:** "X dias seguidos" visível
+- **Adicionar hábito:** Botão pra criar novo hábito (nome, descrição, frequência, cor)
+- **Dados salvam em localStorage:** Fechar e abrir de novo, tudo continua lá
 
-Estrutura do Banco de Tarefas:
-1. **Campo pra adicionar tarefa:**
-   - Input de texto simples (placeholder: "Adicionar tarefa... 📝")
-   - Botão "Adicionar" ou só Enter
-   - Campo de data opcional (ou um toggle "pra hoje" vs "pra depois")
+Identidade visual: Mesma paleta e font da Fase 1. Cards arredondados, clean.
 
-2. **Lista de tarefas:**
-   - Checkbox + título da tarefa + [ícone de delete]
-   - Status visual: ✅ quando marcada como feita (tachado, cor diferente)
-   - Se não houver tarefas: "Nenhuma tarefa ainda. Bora caprichar? 💖"
+Não faça ainda: Editar/deletar hábitos (entra na Fase 2+). Hábitos com frequência custom (só diário por enquanto).
 
-3. **Integração com Home:**
-   - As tarefas "do dia" aparecem na Home automaticamente
-   - Tarefas sem data (soltas) também aparecem na Home até serem feitas
-
-Dados (localStorage):
-- Guardar cada tarefa com: id, título, status (pendente/feita), data (opcional), criadaEm
-- Ao carregar a página, restaurar todas as tarefas do localStorage
-
-Design:
-- Tela separada (acessível pelo menu)
-- Mobile-first
-- Paleta rosa + cinza + branco
-- Ton de voz: simples, próximo, emojis equilibrados
-
-Não faça ainda:
-- Não implementar edição de tarefas (só adicionar, marcar como feita, deletar)
-- Não criar categorias ou tags de tarefas (o simples funciona melhor agora)
-- Não tentar sincronizar com Google Calendar
+Vá me explicando o que está fazendo.
 
 Está pronto quando:
-- [ ] Consigo adicionar uma tarefa e ela aparece na lista
-- [ ] Consigo marcar como feita (checkbox) e ela muda visualmente
-- [ ] As tarefas do dia aparecem na Home automaticamente
-- [ ] Se fechar e abrir de novo, as tarefas tão lá (localStorage funcionando)
-- [ ] Funciona bem no celular e no computador
-```
+- [ ] Aba "Hábitos" funciona (clico e vejo a lista)
+- [ ] Vejo pelo menos 3 hábitos com cores diferentes
+- [ ] Cada hábito tem um checkbox pra marcar/desmarcar hoje
+- [ ] Cada hábito mostra um heatmap dos últimos 30 dias
+- [ ] Botão "+ Adicionar" cria novo hábito
+- [ ] Fecho o app, abro de novo: dados persistem (localStorage)
 
 ---
 
-## Prompt — Fase 3: Banco de ideias
+## Prompt — Fase 3: Metas com progresso
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina. Estou construindo o NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0, 1 e 2 (setup + home + hábitos).
 
-Já concluí as Fases 0, 1 e 2 (setup + Home + Tarefas). Agora vamos construir a Fase 3: o banco de ideias.
+Agora vou construir **SÓ a Fase 3: Metas com progresso**.
 
 Nesta fase:
-- Criar a tela **Banco de Ideias**
-- Campo rápido de texto pra anotar ideias soltas de conteúdo (no consultório, no trânsito, assistindo um vídeo, etc.)
-- Ideias ficam armazenadas e o app puxa delas quando monta o roteiro (Fase 4)
+- **Página de Metas:** Clico na aba "Metas" e vejo lista de metas
+- **Cada meta mostra:**
+  - Nome (ex: "30 dias sem açúcar")
+  - Descrição
+  - Data de início e fim
+  - **Barra de progresso visual** (0-100%)
+  - Dias restantes
+- **Atualizar progresso:** Clico em uma meta e consigo atualizar o % manualmente (slider ou input)
+- **Histórico:** Cada meta tem um mini-gráfico mostrando evolução ao longo do tempo
+- **Adicionar meta:** Botão pra criar nova meta (nome, descrição, data início, data fim)
+- **Dados salvam em localStorage**
 
-Estrutura do Banco de Ideias:
-1. **Campo rápido de texto:**
-   - Textarea grande (mobile-first, ocupa a maioria da tela)
-   - Placeholder: "Ideia rápida... 💭 (ex: 'falar sobre paciente que parou com medo de engordar depois')"
-   - Botão "Salvar ideia" bem grande/destacado (rosa!)
-   - Depois de salvar, campo limpa e pronto pro próximo
+Identidade visual: Mesma. Barra de progresso com Verde menta, muito visual.
 
-2. **Lista de ideias já cadastradas:**
-   - Abaixo do campo, lista todas as ideias salvas
-   - Cada ideia mostra: texto, data que foi criada, status (nova / usada no roteiro)
-   - [Ícone de delete] ou deslize pra deletar (mobile UX)
-   - Se não houver ideias: "Nenhuma ideia cadastrada ainda. Comece a capturar! 💡"
+Não faça ainda: Cálculo automático de progresso (só manual por enquanto). Integrações com hábitos.
 
-3. **Status de ideias:**
-   - Quando uma ideia é usada no roteiro (na Fase 4), seu status muda pra "usada"
-   - Ideias usadas podem ficar com cor diferente ou um ícone indicando que foram puxadas
-
-Dados (localStorage):
-- Guardar cada ideia com: id, texto, criadaEm, status (nova/usada)
-
-Design:
-- Tela separada (acessível pelo menu)
-- Mobile-first, simples, foco no texto
-- Paleta rosa + cinza + branco
-- Tom de voz: "Bora capturar essa ideia?", emojis
-
-Não faça ainda:
-- Não implementar busca em ideias (é só uma lista simples agora)
-- Não tentar editar ideias (só criar e deletar)
-- Não adicionar tags ou categorias
+Vá me explicando.
 
 Está pronto quando:
-- [ ] Consigo digitar uma ideia e clicar em "Salvar"
-- [ ] A ideia aparece na lista abaixo
-- [ ] Se fechar e abrir de novo, as ideias tão lá (localStorage)
-- [ ] Consigo deletar uma ideia
-- [ ] Funciona bem no celular e no computador
-```
+- [ ] Aba "Metas" funciona
+- [ ] Vejo pelo menos 2-3 metas com barras de progresso
+- [ ] Consigo atualizar o progresso de uma meta
+- [ ] Vejo o histórico visual (mini-gráfico)
+- [ ] Posso criar nova meta
+- [ ] Fecho e abro: dados persistem
 
 ---
 
-## Prompt — Fase 4: Planejamento noturno + Roteiro de stories
+## Prompt — Fase 4: Consultório/Agenda
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina. Estou construindo o NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-3.
 
-Já concluí as Fases 0, 1, 2 e 3 (setup + Home + Tarefas + Ideias). Agora vamos construir a **Fase 4: o coração do app** — Planejamento noturno + Roteiro de stories.
+Agora vou construir **SÓ a Fase 4: Consultório/Agenda**.
 
-**IMPORTANTE:** Esta é a fase que define o diferencial do app. Leia bem a seção "3. O diferencial (detalhado)" do PLANO.md.
+Nesta fase:
+- **Página de Consultório:** Aba "Consultório" mostra lista de consultas agendadas
+- **Cada consulta mostra:**
+  - Nome do paciente
+  - Data e horário
+  - Status (agendado/feito/cancelado)
+  - Observações (espaço pra anotar algo sobre o paciente)
+- **Adicionar consulta:** Botão pra marcar nova consulta (paciente, data, horário, observações)
+- **Editar status:** Clico e mudo pra "feito" ou "cancelado"
+- **Filtros:** Mostrar "próximas consultas" ou "todas"
+- **Dados salvam em localStorage**
 
-Nesta fase você vai criar:
+Identidade visual: Mesma. Destaque visual pra "próximas" (Rosa).
 
-### 1. Tela de **Planejamento noturno:**
-- À noite, a pessoa abre essa tela e registra como vai ser amanhã
-- Campos:
-  - Local (select: Viamão / POA / casa / consultório)
-  - Número de consultas (número 0-10)
-  - Período livre (select: manhã / tarde / ambos / nenhum)
-  - Observações (textarea opcional)
-  - Botão "Planejar amanhã" (rosa!)
-- **Regra:** sem preencher esses dados, o app não consegue gerar o roteiro. Validar os campos.
-- Depois de salvar, mostrar uma mensagem tipo "Seu roteiro tá pronto pra amanhã! 💖 Durma bem."
+Não faça ainda: Integração com Google Calendar. SMS/WhatsApp automático.
 
-### 2. Tela de **Roteiro de stories** (gerado):
-- Mostra o roteiro já pronto, com 3 sequências fixas em 3 categorias:
-  - **Humanização:** (descrição, origem da ideia)
-  - **Engajamento:** (descrição, origem)
-  - **Vendas:** (descrição, origem)
-- Cada sequência mostra:
-  - Ícone da categoria (um emoji que represente cada uma, tipo 💭 / 💬 / 💰)
-  - Título/descrição do story
-  - Origem: "Sua ideia" (se veio do banco de ideias) | "Trending" (se veio do trending/feed) | "Automática" (sugestão do app)
-- Botões: "Postei ✅" ou "Não postei ❌"
-- Se clicar em "Não postei", abre um campo pra deixar motivo curto
-
-### 3. A **lógica de geração do roteiro** (aqui é o diferencial):
-- Quando a pessoa salva o planejamento noturno, o app gera um roteiro com base em:
-  1. **Prioritário:** ideias que ela mesma cadastrou no banco de ideias (status = nova)
-  2. **Secundário:** assuntos trending em nutrição/emagrecimento (aqui você pode fingir/mock uns assuntos tipo "GLP-1", "Intestino saudável", "Efeito rebote", etc.)
-  3. **Terceiro:** sugestões automáticas baseadas no tipo de dia (ex: muitas consultas = conteúdo de autoridade/vendas; muito tempo livre = humanização/bastidor)
-  
-- O roteiro SEMPRE segue 3 sequências: uma pra cada categoria (Humanização, Engajamento, Vendas)
-- Exemplo output:
-  ```
-  📅 Seu roteiro pra amanhã — 3 consultas à tarde em POA, manhã livre em casa
-  
-  1️⃣ 💭 Humanização — Rotina de manhã em casa (Sua ideia: "mostrar como começo meu dia")
-  
-  2️⃣ 💬 Engajamento — "Qual é o seu medo com GLP-1?" Quiz nos stories (Trending: GLP-1)
-  
-  3️⃣ 💰 Vendas — "Quer saber como funciona uma consulta?" Convite pra agendar (Automática)
-  ```
-
-### 4. Integração com **Home**:
-- Quando a Home carrega de manhã, mostra o roteiro do dia (se existe um planejamento pra esse dia)
-- Se não houver planejamento pra hoje, mostra placeholder "Ah, esqueceu de planejar ontem? Fica pra hoje 😊"
-
-Dados (localStorage):
-- Guardar cada planejamento com: id, dataDoDiaSeguite, local, numConsultas, períodoLivre, observações, criadoEm
-- Guardar cada roteiro gerado com: id, dataDoDia, sequências (array com as 3 sequências), statusPostagem (postei/não postei), motivo (se não postou)
-
-Design:
-- Duas telas (Planejamento e Roteiro), bem diferenciadas
-- Planejamento é noturno (pode ter um tom/visual mais "repouso" — cores mais suaves)
-- Roteiro é de manhã (visual limpo, pronto pra ação)
-- Mobile-first
-- Paleta rosa + cinza + branco
-- Tom de voz: "Vamo planejar seu dia?", "Seu roteiro tá pronto!", emojis
-
-Não faça ainda:
-- Não tentar analisar trending de verdade (mock/fake tá ótimo agora)
-- Não fazer IA de verdade pra gerar sugestões (lógica simples funciona — tipo: se muitas consultas, puxa ideias de "vendas" do seu banco)
-- Não integrar com Google Calendar (dados fake tá ótimo)
-- Não implementar o loop de aprendizado ainda (vai ser na Fase 6)
+Vá me explicando.
 
 Está pronto quando:
-- [ ] Consigo preencher o planejamento noturno (local, consultas, período livre)
-- [ ] Ao salvar, o app gera um roteiro com 3 sequências nas 3 categorias
-- [ ] O roteiro aparece na Home de manhã (se carregar a página com o dia de hoje)
-- [ ] Cada sequência mostra a origem (sua ideia / trending / automática)
-- [ ] Consigo marcar como "Postei" ou "Não postei" e deixar motivo
-- [ ] Fechei e abri de novo, dados tão lá (localStorage)
-- [ ] Funciona bem no celular e no computador
-- [ ] O tom de voz tá consistente (simples, próximo, emojis)
-```
+- [ ] Aba "Consultório" funciona
+- [ ] Vejo lista de consultas com paciente, data, horário
+- [ ] Consigo adicionar nova consulta
+- [ ] Consigo editar status (agendado/feito/cancelado)
+- [ ] Posso adicionar observações
+- [ ] Fecho e abro: dados persistem
 
 ---
 
-## Prompt — Fase 5: Feed de novidades (Versão 2)
+## Prompt — Fase 5: Tarefas
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-4.
 
-Esta é a Fase 5 (Versão 2 — melhoria): Feed de novidades.
+Agora vou construir **SÓ a Fase 5: Tarefas**.
 
-[Prompt completo omitido nessa versão — será gerado quando chegar a hora]
+Nesta fase:
+- **Página de Tarefas:** Aba "Tarefas" mostra lista de tarefas
+- **Cada tarefa mostra:**
+  - Título
+  - Descrição
+  - Data (se tem)
+  - Horário (se tem)
+  - Categoria (pessoal/trabalho/conteúdo) — cores diferentes pra cada
+  - Status (pendente/concluído) — checkbox pra marcar
+  - Prioridade (baixa/média/alta)
+- **Adicionar tarefa:** Botão pra criar nova tarefa
+- **Filtros:** Mostrar por categoria, por prioridade, mostrar só pendentes
+- **Dados salvam em localStorage**
+
+Identidade visual: Mesma. Cores de categoria (rosa pra pessoal, verde pra trabalho, outro tom pra conteúdo).
+
+Não faça ainda: Lembretes/notificações. Tarefas recorrentes.
+
+Vá me explicando.
 
 Está pronto quando:
-- [ ] Consigo ver assuntos trending em nutrição/emagrecimento em uma tela
-- [ ] Cada assunto é uma pauta pronta pra virar story
-- [ ] Consigo salvar um assunto como ideia no banco de ideias
-```
+- [ ] Aba "Tarefas" funciona
+- [ ] Vejo lista de tarefas com título, categoria, prioridade
+- [ ] Consigo adicionar nova tarefa
+- [ ] Consigo marcar como concluído (checkbox)
+- [ ] Posso filtrar por categoria/prioridade
+- [ ] Fecho e abro: dados persistem
 
 ---
 
-## Prompt — Fase 6: Feedback noturno (Versão 2)
+## Prompt — Fase 6: Roteiros de Stories
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-5.
 
-Esta é a Fase 6 (Versão 2 — melhoria): Feedback noturno (loop de aprendizado).
+Agora vou construir **SÓ a Fase 6: Roteiros de Stories**.
 
-[Prompt completo omitido nessa versão — será gerado quando chegar a hora]
+Nesta fase:
+- **Página de Roteiros:** Aba "Roteiros" mostra lista de roteiros disponíveis
+- **Filtros:** Mostrar por categoria (Humanização/Engajamento/Vendas) ou plataforma (Instagram/TikTok/YouTube)
+- **Cada roteiro mostra:**
+  - Título (ex: "A nutri que ninguém vê")
+  - Categoria
+  - Plataforma
+  - **Preview:** Primeiras linhas do roteiro
+  - Status (rascunho/pronto/gravado/postado)
+- **Abrir roteiro:** Clico e vejo o texto completo (abertura, transições, encerramento)
+- **Marcar status:** Consigo mudar de rascunho → pronto → gravado → postado
+- **Copiar:** Botão pra copiar texto do roteiro (pra colar no telefone e ler na hora de gravar)
+- **Adicionar roteiro:** Botão pra criar novo (título, categoria, plataforma, texto)
+- **Dados salvam em localStorage**
+
+Identidade visual: Mesma. Cores por categoria (Rosa = Humanização, Verde = Engajamento, outro tom = Vendas).
+
+Não faça ainda: Agendamento automático de posts. Integração com plataformas.
+
+Vá me explicando.
 
 Está pronto quando:
-- [ ] À noite consigo registrar o que postei/não postei e motivo
-- [ ] O app aprende com esses padrões e ajusta sugestões futuras
-```
+- [ ] Aba "Roteiros" funciona
+- [ ] Vejo lista de roteiros com filtros por categoria/plataforma
+- [ ] Consigo abrir um roteiro e ver texto completo
+- [ ] Botão "Copiar" funciona (copia pra clipboard)
+- [ ] Consigo marcar status (rascunho/pronto/gravado/postado)
+- [ ] Posso criar novo roteiro
+- [ ] Fecho e abro: dados persistem
 
 ---
 
-## Prompt — Final: Publicar (Supabase + Vercel + PWA)
+## Prompt — Fase 7: Banco de Ideias
 
-```
-Leia o arquivo PLANO.md do projeto NutriRotina.
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-6.
 
-Estou terminando o NutriRotina e agora vamos publicar pra valer.
+Agora vou construir **SÓ a Fase 7: Banco de Ideias**.
 
-Nesta fase você vai:
+Nesta fase:
+- **Página de Ideias:** Aba "Ideias" mostra banco de ideias
+- **Cada ideia mostra:**
+  - Título
+  - Descrição
+  - Categoria (conteúdo/pessoal/trabalho) — cores diferentes
+  - Data criada
+  - Status (ideia/rascunho/desenvolvimento)
+- **Adicionar ideia:** Botão pra criar nova ideia rapidinho
+- **Converter em ação:** Clico em uma ideia e consigo convertê-la em tarefa ou roteiro
+- **Filtros:** Mostrar por categoria, por status
+- **Dados salvam em localStorage**
 
-1. **Integrar Google Calendar API de verdade** (leitura apenas) — a Home vai puxar eventos reais do calendário da Melyna
-2. **Migrar dados de localStorage pra Supabase** — tarefas, ideias, planejamentos, roteiros, feedback — tudo guardado na nuvem
-3. **Deploy na Vercel** — o app fica acessível em um domínio (tipo `nutri-rotina.vercel.app`)
-4. **Instalar como PWA no celular** — "Adicionar à tela inicial" funciona e o app fica com ícone + nome
+Identidade visual: Mesma. Cards simples, leves (pra parecer que são "rascunhos").
 
-Não precisa de login porque é um app pessoal (usuário único).
+Não faça ainda: Organização por pastas. Tags custom.
 
-[Prompt completo detalhado — será gerado quando chegar a hora]
+Vá me explicando.
 
 Está pronto quando:
-- [ ] Google Calendar real aparece na Home
-- [ ] Dados tão salvando no Supabase (não mais em localStorage)
-- [ ] Deploy tá live na Vercel
-- [ ] PWA funciona no celular (ícone na home, abre sem abrir navegador)
-```
+- [ ] Aba "Ideias" funciona
+- [ ] Consigo adicionar nova ideia rapidinho
+- [ ] Vejo lista com categoria (conteúdo/pessoal/trabalho) diferenciada por cor
+- [ ] Posso converter uma ideia em tarefa/roteiro
+- [ ] Filtros funcionam (por categoria, por status)
+- [ ] Fecho e abro: dados persistem
 
 ---
 
-**Próximos passos:** Vamos partir pra **Fase 0** agora mesmo! 🚀
+## Prompt — Fase 8: Gamificação
+
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-7.
+
+Agora vou construir **SÓ a Fase 8: Gamificação**.
+
+Nesta fase:
+- **Pontos:** Concluir um hábito ou tarefa dá pontos (defina um valor simples, ex: 10 pontos)
+- **Nível:** A cada X pontos acumulados, sobe de nível (ex: a cada 100 pontos)
+- **Indicador na Home:** O topo da Home (onde já existe o espaço reservado pra "pontos/streak") passa a mostrar pontos totais e nível atual de verdade
+- **Histórico:** Guarda quando cada ponto foi ganho (data, origem — qual hábito/tarefa)
+- **Dados salvam em localStorage**
+
+Identidade visual: Mesma paleta e fonte das fases anteriores.
+
+Não faça ainda: Avatar customizável, badges/conquistas, ranking ou comparação com outras pessoas.
+
+Vá me explicando o que está fazendo.
+
+Está pronto quando:
+- [ ] Concluo um hábito ou tarefa e vejo os pontos subirem na Home
+- [ ] O nível muda quando acumulo pontos suficientes
+- [ ] Fecho o app, abro de novo: pontos e nível continuam lá (localStorage)
+
+---
+
+## Prompt — Fase 9: Humor/Check-in
+
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-8.
+
+Agora vou construir **SÓ a Fase 9: Humor/Check-in**.
+
+Nesta fase:
+- **Página/aba Humor:** Nova aba "Humor" na navegação
+- **Check-in do dia:** Lista de emojis (ex: 😄 😊 😐 😔 😣) pra marcar como está se sentindo hoje, com espaço opcional pra uma nota curta
+- **Histórico:** Vejo os check-ins dos últimos dias
+- **Retrospectiva semanal:** Um resumo visual simples da semana (quantos dias de cada humor, ou um mini-gráfico)
+- **Dados salvam em localStorage**
+
+Identidade visual: Mesma paleta e fonte.
+
+Não faça ainda: Retrospectiva mensal ou anual. Correlação com hábitos/metas.
+
+Vá me explicando.
+
+Está pronto quando:
+- [ ] Aba "Humor" funciona
+- [ ] Consigo marcar meu humor de hoje com um clique
+- [ ] Vejo o histórico dos últimos dias
+- [ ] Vejo a retrospectiva da semana
+- [ ] Fecho e abro: dados persistem
+
+---
+
+## Prompt — Fase 10: Diário
+
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí as Fases 0-9.
+
+Agora vou construir **SÓ a Fase 10: Diário**.
+
+Nesta fase:
+- **Página/aba Diário:** Nova aba "Diário" na navegação
+- **Nova entrada:** Escrevo livremente, a entrada salva com a data de hoje
+- **Lista de entradas:** Vejo as entradas anteriores organizadas por data (mais recente primeiro)
+- **Buscar:** Campo de busca simples pra encontrar entradas por palavra
+- **Dados salvam em localStorage**
+
+Identidade visual: Mesma paleta e fonte. Visual limpo, sem distração (é um espaço de escrita).
+
+Não faça ainda: Formatação rica de texto (negrito, listas). Anexar fotos.
+
+Vá me explicando.
+
+Está pronto quando:
+- [ ] Aba "Diário" funciona
+- [ ] Consigo escrever e salvar uma entrada de hoje
+- [ ] Vejo entradas antigas listadas por data
+- [ ] A busca encontra entradas por palavra
+- [ ] Fecho e abro: dados persistem
+
+---
+
+## Prompt — Aula 3: Back-end + Publicar
+
+*Esta fase entra na Aula 3 do workshop.*
+
+Leia o arquivo PLANO.md. Estou construindo o app **NutriRotina**. Já concluí todas as fases 0-10 (app completo rodando localmente com localStorage).
+
+Agora vou:
+1. **Conectar Supabase:** Migrar dados do localStorage pra um banco de dados de verdade
+2. **Adicionar login:** Cada pessoa tem sua própria conta, seus dados privados
+3. **Deploy na Vercel:** App rodando na internet
+4. **PWA no celular:** Instalar o app como if it was native
+
+Use a skill **backend-do-seu-app** pra guiar os passos de Supabase e login. Depois faça o deploy.
+
+---
+
+## 📌 Guia rápido
+
+- **Fase 0:** Setup + identidade visual + preview duplo (você SÓ usa o preview pra testar daqui pra frente)
+- **Fase 1:** Home (painel do dia)
+- **Fase 2:** Hábitos + heatmap
+- **Fase 3:** Metas + progresso
+- **Fase 4:** Consultório + agenda
+- **Fase 5:** Tarefas
+- **Fase 6:** Roteiros de stories
+- **Fase 7:** Banco de ideias
+- **Fase 8:** Gamificação
+- **Fase 9:** Humor/check-in
+- **Fase 10:** Diário
+- **Aula 3:** Back-end (Supabase + login) + deploy
+
+Se você fechar e voltar, é só colar o prompt da fase onde parou. Simples!

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriRotina — Preview (Mobile + Desktop)</title>
+    <title>NutriRotina — Preview (Celular + Desktop)</title>
     <style>
         * {
             margin: 0;
@@ -12,132 +12,240 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
             min-height: 100vh;
+            padding: 40px 20px;
             display: flex;
-            align-items: center;
+            gap: 40px;
             justify-content: center;
-            padding: 20px;
+            align-items: flex-start;
+            overflow-x: auto;
         }
 
         .preview-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             gap: 40px;
-            max-width: 1400px;
             width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
+        /* Mobile Preview */
         .preview-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
 
         .preview-label {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
-            color: #6b6b6b;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .mobile-frame {
-            position: relative;
+        /* Mobile Phone Frame */
+        .phone-frame {
             width: 390px;
             height: 844px;
-            border: 12px solid #000;
+            background: #000;
             border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            background: white;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        .mobile-frame::before {
+        .phone-frame::before {
             content: '';
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
-            height: 25px;
+            width: 200px;
+            height: 24px;
             background: #000;
             border-radius: 0 0 20px 20px;
             z-index: 10;
         }
 
-        .mobile-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: #555;
+            border-radius: 10px;
+            z-index: 10;
         }
 
-        .desktop-frame {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 700px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
+        .phone-content {
+            flex: 1;
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             background: white;
+            margin-top: 2px;
         }
 
-        .desktop-frame iframe {
+        .phone-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            display: block;
         }
 
+        /* Desktop Preview */
+        .desktop-frame {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 844px;
+        }
+
+        .desktop-toolbar {
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 40px;
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 6px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .traffic-light.red { background: #ff5f56; }
+        .traffic-light.yellow { background: #ffbd2e; }
+        .traffic-light.green { background: #27c93f; }
+
+        .url-bar {
+            flex: 1;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 12px;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .desktop-content {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .desktop-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive */
         @media (max-width: 1200px) {
+            body {
+                flex-direction: column;
+                gap: 60px;
+            }
+
             .preview-container {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .phone-frame,
+            .desktop-frame {
+                width: 100%;
+                max-width: 600px;
             }
         }
 
-        .info-box {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #e88ba3;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            font-size: 14px;
-            color: #6b6b6b;
-            max-width: 100%;
-            margin-bottom: 20px;
+        @media (max-width: 480px) {
+            .phone-frame {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 390 / 844;
+                max-height: 70vh;
+            }
+
+            .desktop-frame {
+                display: none;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
         }
 
-        .info-box strong {
+        /* Info Banner */
+        .info-banner {
+            background: rgba(232, 139, 163, 0.1);
+            border: 1px solid #e88ba3;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-banner strong {
             color: #e88ba3;
         }
     </style>
 </head>
 <body>
+    <div class="info-banner">
+        <strong>Preview duplo do NutriRotina</strong> — Você verá o app em dois tamanhos ao mesmo tempo. Clique em qualquer um deles e interaja normalmente. As mudanças aparecem nos dois!
+    </div>
+
     <div class="preview-container">
+        <!-- Mobile Preview -->
         <div class="preview-section">
-            <div class="info-box">
-                <strong>📱 Mobile (iPhone)</strong><br>
-                Fase 1: Timeline visual com cores por categoria
-            </div>
-            <div class="preview-label">Mobile</div>
-            <div class="mobile-frame">
-                <iframe src="index.html"></iframe>
+            <div class="preview-label">📱 Mobile (390px)</div>
+            <div class="phone-frame">
+                <div class="phone-content">
+                    <iframe class="phone-iframe" src="./index.html"></iframe>
+                </div>
             </div>
         </div>
 
+        <!-- Desktop Preview -->
         <div class="preview-section">
-            <div class="info-box">
-                <strong>🖥️ Desktop (Computador)</strong><br>
-                O app se adapta para telas maiores
-            </div>
-            <div class="preview-label">Desktop</div>
+            <div class="preview-label">🖥️ Desktop (1024px)</div>
             <div class="desktop-frame">
-                <iframe src="index.html"></iframe>
+                <div class="desktop-toolbar">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="url-bar">http://localhost/index.html</div>
+                </div>
+                <div class="desktop-content">
+                    <iframe class="desktop-iframe" src="./index.html"></iframe>
+                </div>
             </div>
         </div>
     </div>

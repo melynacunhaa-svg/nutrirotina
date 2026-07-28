@@ -1,0 +1,193 @@
+{
+  "geradoEm": "2026-07-28T09:00:00Z",
+  "roteiros": [
+    {
+      "dia": "Segunda",
+      "data": "2026-07-28",
+      "weekday": 1,
+      "pauta": "Composição corporal vs peso — por que a balança mente",
+      "estudoTitulo": "Effect of GLP-1 receptor agonists on body weight reduction in obesity",
+      "categoria": "Humanização",
+      "reel": {
+        "hook": "Se você está emagrecendo mas não faz uma coisa, pode estar perdendo músculo agora — e nem está percebendo.",
+        "problema": "A maioria das dietas foca só no peso. Mas a balança não distingue gordura de músculo. Quando você corta calorias sem proteína suficiente — e sem treino de força — o corpo não perde só gordura. Ele 'come' o músculo também. E músculo não é só estética. Músculo é metabolismo. É o que faz você queimar caloria enquanto está sentada no sofá.",
+        "consequencia": "Quando você perde músculo, seu metabolismo fica mais lento. O corpo aprende a gastar menos. E aí vem o efeito sanfona — não por falta de força de vontade, mas porque o seu metabolismo foi junto na dieta. É por isso que tanta gente perde peso e recupera tudo depois de alguns meses.",
+        "exemploReal": "Eu tive uma paciente que perdeu 9 quilos em três meses — ficou super feliz. Mas quando voltou ao consultório, a bioimpedância mostrou que quase metade era massa magra. O metabolismo tinha desacelerado, e em seis meses o peso voltou quase todo. Não foi culpa dela. Foi a estratégia errada.",
+        "solucao": "O que muda o jogo: proteína no nível certo — que varia de pessoa pra pessoa — e treino de força como parte da rotina. Não pra ficar musculosa. Pra preservar o que você já tem enquanto emagrece.",
+        "cta": "Me conta nos comentários: você treina força enquanto está emagrecendo? Ou só faz cardio? Vou responder todo mundo."
+      },
+      "notasGravacao": "Tom: Direta, um pouco preocupada no início — como quem está te contando uma coisa importante que ninguém te disse. Aquece no meio quando fala da solução. Câmera na mão, ambiente bem iluminado. Fale rápido no hook (cria urgência), desacelere quando explicar o mecanismo.",
+      "stories": [
+        {
+          "ato": 1,
+          "tipo": "lifestyle-conexao",
+          "titulo": "Bom dia de segunda",
+          "descricao": "Começo de dia real com dados da rotina",
+          "textNaTela": "Bom dia! Que comece esse dia com intenção 🌿",
+          "conteudo": "Algo simples sobre como você começa o dia — sem roteiro.",
+          "lifestyleData": {
+            "horaAcordou": "06:45",
+            "primeiraRefeicao": "Café com ovo mexido e pão integral",
+            "atividade": "Academia — treino de força 45min",
+            "timestamp": "2026-07-28"
+          }
+        },
+        {
+          "ato": 2,
+          "tipo": "bastidor",
+          "titulo": "Almoço real",
+          "descricao": "Refeição do dia — prato real, não produção",
+          "textNaTela": "Almoço de nutricionista na vida real 👀",
+          "conteudo": "Frango grelhado, batata-doce, brócolis e azeite",
+          "lifestyleData": {
+            "refeicao": "Frango (200g), batata-doce (150g), brócolis (200g), azeite 1 colher",
+            "hora": "12:30",
+            "timestamp": "2026-07-28"
+          }
+        },
+        {
+          "ato": 3,
+          "tipo": "dor-gancho",
+          "titulo": "O medo do músculo",
+          "descricao": "Cria curiosidade e retenção",
+          "textNaTela": "Você pode estar emagrecendo do jeito errado sem saber.",
+          "conteudo": "Hoje quero falar de algo que vejo toda semana no consultório — e que ninguém explica direito."
+        },
+        {
+          "ato": 4,
+          "tipo": "educacao",
+          "titulo": "Emagrecimento ≠ peso",
+          "descricao": "Educação simples e prática",
+          "textNaTela": "A balança não sabe o que você perdeu. Músculo ou gordura? Faz toda a diferença.",
+          "conteudo": "Explique brevemente: dieta sem proteína + força = perda de músculo + metabolismo lento."
+        },
+        {
+          "ato": 5,
+          "tipo": "autoridade",
+          "titulo": "No consultório",
+          "descricao": "Posicionamento de autoridade",
+          "textNaTela": "No consultório eu avalio composição corporal, não só o peso.",
+          "conteudo": "Mencione brevemente como você conduz o acompanhamento — sem vender, só mostrando."
+        },
+        {
+          "ato": 6,
+          "tipo": "interacao",
+          "titulo": "Enquete",
+          "descricao": "Aumenta engajamento",
+          "textNaTela": "Quando está emagrecendo, você faz treino de força?",
+          "conteudo": "Sim, sempre / Não, só cardio",
+          "enquete": true
+        },
+        {
+          "ato": 7,
+          "tipo": "posicionamento",
+          "titulo": "O que eu acredito",
+          "descricao": "Diferenciação e valores",
+          "textNaTela": "Emagrecer não é castigo. É estratégia.",
+          "conteudo": "Eu acredito que resultado sustentável vem de entender como o seu corpo funciona — e não de sofrer com dieta."
+        },
+        {
+          "ato": 8,
+          "tipo": "cta-convite",
+          "titulo": "Vem falar comigo",
+          "descricao": "CTA leve para acompanhamento",
+          "textNaTela": "Se você quer entender o que está acontecendo com o seu corpo — vem falar comigo. Direct aberto 💬",
+          "conteudo": "Nada além do que está na tela."
+        }
+      ]
+    },
+    {
+      "dia": "Terça",
+      "data": "2026-07-29",
+      "weekday": 2,
+      "pauta": "Saúde intestinal — o segredo invisível do emagrecimento",
+      "estudoTitulo": "Microbiota composition and metabolic endotoxemia in obesity",
+      "categoria": "Engajamento",
+      "reel": {
+        "hook": "Seu intestino não é só pra digerir. É uma fábrica de moléculas que definem se você emagrece ou engorda.",
+        "problema": "Quando você tem disbiose — desequilíbrio de bactérias — o corpo inteiro sofre. Você pode comer 'certo' mas o intestino inflamado não absorve nada direito.",
+        "consequencia": "Compulsão por açúcar aumenta, energia cai, e mesmo com dieta o peso não sai. Tudo porque o intestino está pedindo por calorias que ele não conseguiu absorver.",
+        "exemploReal": "Tive paciente que comia bem mas sempre estava com fome. Resolveu quando a gente reequilibrou a microbiota com fibra e probióticos específicos.",
+        "solucao": "Fermentados, fibra de qualidade, e menos ultra-processados. Simples.",
+        "cta": "Me conta: qual é seu relacionamento com o intestino? Inchaço? Constipação? Vou responder."
+      },
+      "notasGravacao": "Tom: Leve, curiosa. Fale sobre bactérias como se fossem personagens — 'as boas' vs 'as ruins'. Use comparações que façam sentido para o público.",
+      "stories": [
+        {
+          "ato": 1,
+          "tipo": "lifestyle-conexao",
+          "titulo": "Terça de quem acorda cedo",
+          "descricao": "Começo de dia real de terça",
+          "textNaTela": "Acordei 6h — vou molhar o bico com chá de gengibre 🫖",
+          "lifestyleData": {
+            "horaAcordou": "06:00",
+            "primeiraRefeicao": "Chá de gengibre com mel e limão",
+            "atividade": "Meditação 10min",
+            "timestamp": "2026-07-29"
+          }
+        },
+        {
+          "ato": 2,
+          "tipo": "bastidor",
+          "titulo": "Preparando consulta",
+          "descricao": "Dia de consultório — bastidor real",
+          "textNaTela": "Dia de consultório — já fiz 8 atendimentos 😅",
+          "lifestyleData": {
+            "atividade": "Atendimentos no consultório",
+            "horario": "09:00 - 17:00",
+            "timestamp": "2026-07-29"
+          }
+        },
+        {
+          "ato": 3,
+          "tipo": "dor-gancho",
+          "titulo": "A bactéria que faz você comer mais",
+          "descricao": "Problema que é relatable",
+          "textNaTela": "Compulsão pode ser culpa do seu intestino, não da sua vontade.",
+          "conteudo": "Quando o intestino está inflamado, o corpo literally pede comida pra compensar."
+        },
+        {
+          "ato": 4,
+          "tipo": "educacao",
+          "titulo": "Disbiose 101",
+          "descricao": "Explicar o conceito",
+          "textNaTela": "Bactérias boas = menos fome de verdade.",
+          "conteudo": "A microbiota afeta hormônios da saciedade. Sem ela equilibrada, dieta é luta."
+        },
+        {
+          "ato": 5,
+          "tipo": "autoridade",
+          "titulo": "Como eu avalio",
+          "descricao": "Posicionamento profissional",
+          "textNaTela": "No meu acompanhamento a gente inclui análise de microbiota.",
+          "conteudo": "Porque não adianta dieta perfeita com intestino inflamado."
+        },
+        {
+          "ato": 6,
+          "tipo": "interacao",
+          "titulo": "Enquete: seu intestino",
+          "descricao": "Engajamento direto",
+          "textNaTela": "Seu intestino trabalha bem?",
+          "conteudo": "Sim / Precisa de ajuda",
+          "enquete": true
+        },
+        {
+          "ato": 7,
+          "tipo": "posicionamento",
+          "titulo": "Fermentado é terapia",
+          "descricao": "Posicionamento diferente",
+          "textNaTela": "Comer bem é também cuidar de quem cuida de você — suas bactérias.",
+          "conteudo": "Que paradoxo: a coisa mais saudável é a mais deliciosa — quando é fermentada."
+        },
+        {
+          "ato": 8,
+          "tipo": "cta-convite",
+          "titulo": "Quer reequilibrar?",
+          "descricao": "Convite natural",
+          "textNaTela": "Se seu intestino está te sabotando, vem falar. Direct aberto. 💚",
+          "conteudo": "Simples assim."
+        }
+      ]
+    }
+  ]
+}

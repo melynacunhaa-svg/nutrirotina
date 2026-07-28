@@ -1,0 +1,48 @@
+[
+  {
+    "topic": "GLP-1 e Emagrecimento",
+    "title": "Effect of GLP-1 receptor agonists on body weight reduction in obesity: A meta-analysis of randomized controlled trials",
+    "publishedDate": "15/03/2024",
+    "journal": "Nature Metabolism",
+    "evidenceLevel": "A",
+    "evidenceType": "Meta-análise",
+    "viralScore": "ALTO",
+    "pubmedUrl": "https://pubmed.ncbi.nlm.nih.gov/38410247",
+    "doiUrl": "https://doi.org/10.1038/s42255-024-00982-2",
+    "resumo": "Estudo abrangente analisando 47 ensaios clínicos randomizados sobre GLP-1 em mais de 18.000 pacientes. Demonstra redução média de peso de 8-12% em 12 meses com uso de semaglutida vs placebo.",
+    "resultadosPraticos": [
+      "Perda média de 8-12% do peso corporal",
+      "Melhora significativa em marcadores metabólicos (glicemia, triglicerídeos)",
+      "Efeito mantido por até 18 meses com adesão contínua"
+    ],
+    "impactoClinico": "Revolucionou o tratamento de obesidade classe II-III. Primeiros resultados mostram eficácia superior a medicações prévias e mudanças comportamentais isoladas.",
+    "comoUsarConsulta": "Ideal para pacientes com IMC >30 ou histórico de múltiplas dietas fracassadas. Explicar expectativa realista (8-12%), efeitos colaterais gastrointestinais iniciais, necessidade de adesão contínua.",
+    "limitacoes": "Custo elevado, acesso limitado por convênios, possível reganho após descontinuação. Dados de longo prazo (>3 anos) ainda limitados.",
+    "reelHook": "\"Você tá tentando emagrecer há ANOS mas nada funciona? Descobrir a ciência por trás do GLP-1 pode ser o plot twist que você tá esperando! 🧬💚\"",
+    "storyIdea": "Mostrar gráfico comparativo: dieta + exercício vs GLP-1, depoimento real de paciente (anônimo), explicar mecanismo de forma simples (diminui fome, aumenta saciedade)",
+    "cta": "Tem curiosidade? Clica no link da bio pra agendar sua consulta de emagrecimento consciente!"
+  },
+  {
+    "topic": "Saúde Intestinal",
+    "title": "Microbiota composition and metabolic endotoxemia in obesity: Role of short-chain fatty acids",
+    "publishedDate": "22/02/2024",
+    "journal": "Gut Microbes",
+    "evidenceLevel": "B",
+    "evidenceType": "Ensaio Clínico Randomizado",
+    "viralScore": "MEDIO",
+    "pubmedUrl": "https://pubmed.ncbi.nlm.nih.gov/38345821",
+    "doiUrl": "https://doi.org/10.1080/19490976.2024.2318625",
+    "resumo": "Pesquisa com 120 pacientes obesos mostrando relação entre composição de microbiota intestinal e inflamação sistêmica. Ácidos graxos de cadeia curta (AGCC) têm papel protetor.",
+    "resultadosPraticos": [
+      "Aumento de Faecalibacterium prausnitzii correlaciona com menor índice inflamatório",
+      "Pacientes com alta produção de butirato perdem 5x mais peso em dieta hipocalórica",
+      "Fibra pré-biótica aumenta diversidade de AGCC em 60 dias"
+    ],
+    "impactoClinico": "Valida a importância de enfoque prebiótico e probiótico no tratamento de obesidade. Abre perspectiva de terapias baseadas em microbiota como coadjuvante.",
+    "comoUsarConsulta": "Explicar que 'barriga inflamada' não é só incômodo estético - é inflamação de verdade. Recomendar teste de microbiota (se acessível), prescrever fermentados, fibras de qualidade.",
+    "limitacoes": "Testes de microbiota ainda caros e não padronizados. Efetividade de probióticos específicos varia bastante entre indivíduos. Relação de causalidade ainda não 100% clara.",
+    "reelHook": "\"Seu intestino não é só pra digerir... é uma FÁBRICA DE MOLÉCULAS que definem se você emagrece ou engorda! 🧠✨\"",
+    "storyIdea": "Animação simplificada mostrando bactérias boas vs ruins, como fibra alimenta as boas, resultado em saciedade natural",
+    "cta": "Quer saber se sua microbiota está te sabotando? Marca uma avaliação personalizada!"
+  }
+]
