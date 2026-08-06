@@ -142,15 +142,17 @@ async function logout() {
 }
 
 // Ouvir mudanças de autenticação em tempo real
-if (supabase) {
-  supabase.auth.onAuthStateChange((event, session) => {
-    console.log('🔐 Auth event:', event);
-    if (event === 'SIGNED_IN') {
-      currentUser = session.user;
-      showApp();
-    } else if (event === 'SIGNED_OUT') {
-      currentUser = null;
-      showAuthScreen();
-    }
-  });
-}
+setTimeout(() => {
+  if (window.supabaseClient) {
+    window.supabaseClient.auth.onAuthStateChange((event, session) => {
+      console.log('🔐 Auth event:', event);
+      if (event === 'SIGNED_IN') {
+        currentUser = session.user;
+        showApp();
+      } else if (event === 'SIGNED_OUT') {
+        currentUser = null;
+        showAuthScreen();
+      }
+    });
+  }
+}, 1000);
