@@ -1,0 +1,46 @@
+[build]
+publish = "."
+command = ""
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = "SAMEORIGIN"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+for = "/manifest.json"
+[headers.values]
+Content-Type = "application/manifest+json"
+
+[[headers]]
+for = "/service-worker.js"
+[headers.values]
+Content-Type = "application/javascript"
+Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/index.html"
+[headers.values]
+Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/app.js"
+[headers.values]
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/styles.css"
+[headers.values]
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/data/*"
+[headers.values]
+Cache-Control = "public, max-age=3600"
