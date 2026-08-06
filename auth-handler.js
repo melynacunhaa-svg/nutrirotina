@@ -16,6 +16,15 @@ function waitForSupabase() {
 // Verificar se usuário está logado ao carregar a página
 document.addEventListener('DOMContentLoaded', async () => {
   await waitForSupabase();
+
+  // Verificar se é link de reset de senha
+  const hash = window.location.hash;
+  if (hash.includes('type=recovery')) {
+    console.log('🔐 Link de reset de senha detectado');
+    showResetPasswordScreen();
+    return;
+  }
+
   await checkAuthStatus();
   setupAuthListeners();
 });
@@ -138,6 +147,68 @@ async function logout() {
     console.log('✅ Logout realizado');
   } catch (error) {
     console.error('❌ Erro ao fazer logout:', error);
+  }
+}
+
+// Reset de Senha
+function showResetPasswordScreen() {
+  const authScreen = document.getElementById('auth-screen');
+  const appContainer = document.querySelector('.app-container');
+
+  if (authScreen) {
+    authScreen.innerHTML = `
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>🔑 Resetar Senha</h1>
+          <p>Crie uma nova senha</p>
+        </div>
+        <form id="reset-password-form" class="auth-form">
+          <input type="password" id="reset-password" placeholder="Nova senha (mín. 6 caracteres)" required />
+          <input type="password" id="reset-password-confirm" placeholder="Confirmar senha" required />
+          <button type="submit" class="submit-btn">Atualizar Senha</button>
+          <p id="reset-error" class="auth-error"></p>
+        </form>
+      </div>
+    `;
+    authScreen.classList.remove('hidden');
+    authScreen.style.display = 'flex';
+    if (appContainer) appContainer.style.display = 'none';
+
+    document.getElementById('reset-password-form').addEventListener('submit', handleResetPassword);
+  }
+}
+
+async function handleResetPassword(e) {
+  e.preventDefault();
+
+  const password = document.getElementById('reset-password').value;
+  const passwordConfirm = document.getElementById('reset-password-confirm').value;
+  const errorEl = document.getElementById('reset-error');
+
+  if (password !== passwordConfirm) {
+    errorEl.textContent = 'As senhas não conferem!';
+    return;
+  }
+
+  if (password.length < 6) {
+    errorEl.textContent = 'Senha deve ter pelo menos 6 caracteres';
+    return;
+  }
+
+  try {
+    const { error } = await window.supabaseClient.auth.updateUser({ password });
+    if (error) throw error;
+
+    errorEl.textContent = '';
+    errorEl.style.color = 'green';
+    errorEl.textContent = 'Senha atualizada! Redirecionando...';
+
+    setTimeout(() => {
+      window.location.hash = '';
+      window.location.reload();
+    }, 2000);
+  } catch (error) {
+    errorEl.textContent = 'Erro: ' + error.message;
   }
 }
 
