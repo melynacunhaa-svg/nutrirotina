@@ -986,12 +986,12 @@
         </main>
     </div>
 
-    <!-- Supabase Config -->
-    <script src="supabase-config.js"></script>
-    <!-- Auth Handler -->
-    <script src="auth-handler.js"></script>
-    <!-- App -->
-    <script src="app.js"></script>
+    <!-- Supabase Config (tem que ser antes de auth) -->
+    <script src="supabase-config.js" defer></script>
+    <!-- Auth Handler (depois do config) -->
+    <script src="auth-handler.js" defer></script>
+    <!-- App (por último) -->
+    <script src="app.js" defer></script>
     <script>
         // PWA Service Worker Registration
         if ('serviceWorker' in navigator) {
