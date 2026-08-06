@@ -18,7 +18,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="app-container">
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="auth-screen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>🌿 NutriRotina</h1>
+                <p>Organize sua vida com dados de verdade</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Entrar</button>
+                <button class="auth-tab" data-tab="signup">Criar Conta</button>
+            </div>
+            <form id="auth-form" class="auth-form" data-mode="login">
+                <input type="email" id="auth-email" placeholder="seu@email.com" required />
+                <input type="password" id="auth-password" placeholder="Senha (mín. 6 caracteres)" required />
+                <button type="submit" class="submit-btn" id="auth-submit-btn">Entrar</button>
+                <p id="auth-error" class="auth-error"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container" style="display: none;">
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <a href="#home" class="nav-item active" data-section="home">
