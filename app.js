@@ -3336,17 +3336,22 @@ async function setupSupabaseSync() {
     }
 
     // Se ainda não migrou, fazer a migração agora (pra dados já salvos)
+    console.log('currentUser:', currentUser, 'habitsManager:', habitsManager?.habits?.length || 0);
     const migrationDone = localStorage.getItem('nutrirotina_migrated_to_supabase');
-    if (!migrationDone && currentUser) {
+    if (!migrationDone) {
         console.log('🚀 Migrando dados salvos pro Supabase...');
-        await SupabaseData.migrateLocalDataToSupabase({
+        const result = await SupabaseData.migrateLocalDataToSupabase({
             habits: habitsManager,
             tasks: tasksManager,
             goals: goalsManager,
             clinic: clinicManager,
             gamification: gamificationManager
         });
-        localStorage.setItem('nutrirotina_migrated_to_supabase', 'true');
+        if (result) {
+            localStorage.setItem('nutrirotina_migrated_to_supabase', 'true');
+        }
+    } else {
+        console.log('✅ Dados já foram migrados');
     }
 
     // Agora, interceptar os saves para enviar pro Supabase
