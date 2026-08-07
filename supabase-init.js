@@ -5,8 +5,16 @@ window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXB
 // Esperar supabase-js estar disponível, depois inicializar
 window.addEventListener('load', () => {
   if (typeof window.supabase !== 'undefined' && !window.supabaseClient) {
-    window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-    console.log('✅ Supabase inicializado');
+    // Configurar para manter sessão persistida
+    window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        storage: window.localStorage
+      }
+    });
+    console.log('✅ Supabase inicializado com sessão persistida');
   }
 });
 
