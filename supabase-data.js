@@ -614,6 +614,79 @@ window.SupabaseData = {
     }
   },
 
+  // DELETE FUNCTIONS
+  async deleteHabit(habitId) {
+    const userId = await this.getCurrentUserId();
+    if (!userId) return;
+    try {
+      const { error } = await window.supabaseClient
+        .from('habits')
+        .delete()
+        .eq('id', habitId)
+        .eq('user_id', userId);
+      if (error) throw error;
+      console.log('✅ Hábito deletado');
+      return true;
+    } catch (error) {
+      console.error('Erro ao deletar hábito:', error);
+      return false;
+    }
+  },
+
+  async deleteTask(taskId) {
+    const userId = await this.getCurrentUserId();
+    if (!userId) return;
+    try {
+      const { error } = await window.supabaseClient
+        .from('tasks')
+        .delete()
+        .eq('id', taskId)
+        .eq('user_id', userId);
+      if (error) throw error;
+      console.log('✅ Tarefa deletada');
+      return true;
+    } catch (error) {
+      console.error('Erro ao deletar tarefa:', error);
+      return false;
+    }
+  },
+
+  async deleteGoal(goalId) {
+    const userId = await this.getCurrentUserId();
+    if (!userId) return;
+    try {
+      const { error } = await window.supabaseClient
+        .from('goals')
+        .delete()
+        .eq('id', goalId)
+        .eq('user_id', userId);
+      if (error) throw error;
+      console.log('✅ Meta deletada');
+      return true;
+    } catch (error) {
+      console.error('Erro ao deletar meta:', error);
+      return false;
+    }
+  },
+
+  async deleteAppointment(appointmentId) {
+    const userId = await this.getCurrentUserId();
+    if (!userId) return;
+    try {
+      const { error } = await window.supabaseClient
+        .from('clinic_appointments')
+        .delete()
+        .eq('id', appointmentId)
+        .eq('user_id', userId);
+      if (error) throw error;
+      console.log('✅ Consulta deletada');
+      return true;
+    } catch (error) {
+      console.error('Erro ao deletar consulta:', error);
+      return false;
+    }
+  },
+
   // MIGRAÇÃO: envia todos os dados do localStorage pro Supabase
   async migrateLocalDataToSupabase(managers) {
     const userId = await this.getCurrentUserId();

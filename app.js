@@ -1123,6 +1123,7 @@ function renderHabits() {
                         </div>
                     </div>
                 </div>
+                <button type="button" class="delete-habit-btn" data-habit-id="${habit.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
             </div>
             ${heatmapHTML}
         `;
@@ -1163,6 +1164,22 @@ function renderHabits() {
             habitsManager.toggleHabitDay(habitId, date);
             renderHabits();
             renderToday();
+        });
+    });
+
+    // Delete habit button
+    document.querySelectorAll('.delete-habit-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const habitId = btn.dataset.habitId;
+            if (confirm('Tem certeza que quer apagar esse hábito?')) {
+                habitsManager.habits = habitsManager.habits.filter(h => h.id != habitId);
+                habitsManager.saveHabits();
+                if (typeof SupabaseData !== 'undefined') {
+                    await SupabaseData.deleteHabit(habitId);
+                }
+                renderHabits();
+            }
         });
     });
 }
@@ -1220,6 +1237,7 @@ function renderGoals() {
         goalCard.innerHTML = `
             <div class="goal-card-header">
                 <div class="goal-title">${goal.name}</div>
+                <button type="button" class="delete-goal-btn" data-goal-id="${goal.id}" title="Apagar meta" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px;">🗑️ Apagar</button>
                 ${goal.description ? `<div class="goal-desc">${goal.description}</div>` : ''}
             </div>
             <div class="goal-progress-bar">
@@ -1284,6 +1302,22 @@ function renderGoals() {
             }
         });
     });
+
+    // Delete goal button
+    document.querySelectorAll('.delete-goal-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const goalId = btn.dataset.goalId;
+            if (confirm('Tem certeza que quer apagar essa meta?')) {
+                goalsManager.goals = goalsManager.goals.filter(g => g.id !== goalId);
+                goalsManager.saveGoals();
+                if (typeof SupabaseData !== 'undefined') {
+                    await SupabaseData.deleteGoal(goalId);
+                }
+                renderGoals();
+            }
+        });
+    });
 }
 
 // Render Clinic
@@ -1315,11 +1349,14 @@ function renderClinic() {
                     <div class="clinic-patient-name">${appointment.patientName}</div>
                     ${appointment.phone ? `<div class="clinic-phone">${appointment.phone}</div>` : ''}
                 </div>
-                <select class="status-select ${appointment.status}" data-id="${appointment.id}">
-                    <option value="agendado" ${appointment.status === 'agendado' ? 'selected' : ''}>Agendado</option>
-                    <option value="feito" ${appointment.status === 'feito' ? 'selected' : ''}>Feito</option>
-                    <option value="cancelado" ${appointment.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
-                </select>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <select class="status-select ${appointment.status}" data-id="${appointment.id}">
+                        <option value="agendado" ${appointment.status === 'agendado' ? 'selected' : ''}>Agendado</option>
+                        <option value="feito" ${appointment.status === 'feito' ? 'selected' : ''}>Feito</option>
+                        <option value="cancelado" ${appointment.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+                    </select>
+                    <button type="button" class="delete-appointment-btn" data-appointment-id="${appointment.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
+                </div>
             </div>
             <div class="clinic-datetime">
                 <span>📅 ${dateLabel}</span>
@@ -1336,6 +1373,23 @@ function renderClinic() {
             clinicManager.updateStatus(e.target.dataset.id, e.target.value);
             renderClinic();
             renderToday();
+        });
+    });
+
+    // Delete appointment button
+    document.querySelectorAll('.delete-appointment-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const appointmentId = btn.dataset.appointmentId;
+            if (confirm('Tem certeza que quer apagar essa consulta?')) {
+                clinicManager.appointments = clinicManager.appointments.filter(a => a.id != appointmentId);
+                clinicManager.saveAppointments();
+                if (typeof SupabaseData !== 'undefined') {
+                    await SupabaseData.deleteAppointment(appointmentId);
+                }
+                renderClinic();
+                renderToday();
+            }
         });
     });
 
@@ -1410,6 +1464,7 @@ function renderTasks() {
                         ${dateTimeHTML}
                     </div>
                 </div>
+                <button type="button" class="delete-task-btn" data-task-id="${task.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
             </div>
         `;
 
@@ -1422,6 +1477,23 @@ function renderTasks() {
             tasksManager.updateStatus(taskId, e.target.checked ? 'concluído' : 'pendente');
             renderTasks();
             renderToday();
+        });
+    });
+
+    // Delete task button
+    document.querySelectorAll('.delete-task-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const taskId = btn.dataset.taskId;
+            if (confirm('Tem certeza que quer apagar essa tarefa?')) {
+                tasksManager.tasks = tasksManager.tasks.filter(t => t.id !== taskId);
+                tasksManager.saveTasks();
+                if (typeof SupabaseData !== 'undefined') {
+                    await SupabaseData.deleteTask(taskId);
+                }
+                renderTasks();
+                renderToday();
+            }
         });
     });
 }
