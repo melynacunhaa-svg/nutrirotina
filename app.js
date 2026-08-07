@@ -3222,4 +3222,149 @@ window.addEventListener('load', () => {
     if (homeNav) {
         homeNav.click();
     }
+
+    // SYNC WITH SUPABASE
+    setupSupabaseSync();
 });
+
+// Setup Supabase synchronization
+async function setupSupabaseSync() {
+    console.log('🔄 Iniciando sincronização com Supabase...');
+
+    // Aguardar SupabaseData estar pronto
+    let attempts = 0;
+    while (!window.SupabaseData && attempts < 50) {
+        await new Promise(r => setTimeout(r, 100));
+        attempts++;
+    }
+
+    if (!SupabaseData) {
+        console.warn('⚠️ SupabaseData não carregou, sincronização desativada');
+        return;
+    }
+
+    // Carregar dados do Supabase
+    try {
+        console.log('📥 Carregando dados do Supabase...');
+
+        const [habits, tasks, goals, appointments, schedule, stories, ideas, moodCheckins, journalEntries, gamification] = await Promise.all([
+            SupabaseData.loadHabits(),
+            SupabaseData.loadTasks(),
+            SupabaseData.loadGoals(),
+            SupabaseData.loadClinicAppointments(),
+            SupabaseData.loadSchedule(),
+            SupabaseData.loadStories(),
+            SupabaseData.loadIdeas(),
+            SupabaseData.loadMoodCheckins(),
+            SupabaseData.loadJournalEntries(),
+            SupabaseData.loadGamification()
+        ]);
+
+        // Se houver dados no Supabase, usar eles
+        if (habits.length > 0) {
+            habitsManager.habits = habits.map(h => ({
+                id: h.id,
+                name: h.name,
+                description: h.description,
+                frequency: h.frequency,
+                category: h.category,
+                color: h.color,
+                time: h.time,
+                reminder: h.reminder,
+                weeklyDays: h.weekly_days || [],
+                monthlyDay: h.monthly_day,
+                createdAt: h.created_at,
+                history: {}
+            }));
+            console.log('✅ Hábitos carregados do Supabase:', habits.length);
+        }
+
+        if (tasks.length > 0) {
+            tasksManager.tasks = tasks.map(t => ({
+                id: t.id,
+                title: t.title,
+                description: t.description,
+                category: t.category,
+                priority: t.priority,
+                status: t.status,
+                date: t.date,
+                time: t.time,
+                createdAt: t.created_at
+            }));
+            console.log('✅ Tarefas carregadas do Supabase:', tasks.length);
+        }
+
+        if (goals.length > 0) {
+            goalsManager.goals = goals.map(g => ({
+                id: g.id,
+                name: g.name,
+                description: g.description,
+                startDate: g.start_date,
+                endDate: g.end_date,
+                progress: g.progress,
+                status: g.status,
+                createdAt: g.created_at,
+                milestones: [],
+                history: []
+            }));
+            console.log('✅ Metas carregadas do Supabase:', goals.length);
+        }
+
+        if (appointments.length > 0) {
+            clinicManager.appointments = appointments.map(a => ({
+                id: a.id,
+                patientName: a.patient_name,
+                phone: a.phone,
+                date: a.date,
+                time: a.time,
+                notes: a.notes,
+                createdAt: a.created_at
+            }));
+            console.log('✅ Consultório carregado do Supabase:', appointments.length);
+        }
+
+        if (gamification && gamification.points) {
+            gamificationManager.data = {
+                points: gamification.points || 0,
+                history: gamification.history || []
+            };
+            console.log('✅ Gamificação carregada do Supabase');
+        }
+
+    } catch (error) {
+        console.error('❌ Erro ao carregar dados:', error);
+    }
+
+    // Agora, interceptar os saves para enviar pro Supabase
+    const originalSaveHabits = habitsManager.saveHabits.bind(habitsManager);
+    habitsManager.saveHabits = function() {
+        originalSaveHabits();
+        SupabaseData.saveHabits(this.habits).catch(console.error);
+    };
+
+    const originalSaveTasks = tasksManager.saveTasks.bind(tasksManager);
+    tasksManager.saveTasks = function() {
+        originalSaveTasks();
+        SupabaseData.saveTasks(this.tasks).catch(console.error);
+    };
+
+    const originalSaveGoals = goalsManager.saveGoals.bind(goalsManager);
+    goalsManager.saveGoals = function() {
+        originalSaveGoals();
+        SupabaseData.saveGoals(this.goals).catch(console.error);
+    };
+
+    const originalSaveAppointments = clinicManager.saveAppointments.bind(clinicManager);
+    clinicManager.saveAppointments = function() {
+        originalSaveAppointments();
+        SupabaseData.saveClinicAppointments(this.appointments).catch(console.error);
+    };
+
+    const originalSaveGamification = gamificationManager.saveData.bind(gamificationManager);
+    gamificationManager.saveData = function() {
+        originalSaveGamification();
+        SupabaseData.saveGamification(this.data).catch(console.error);
+    };
+
+    console.log('✅ Sincronização com Supabase ativada!');
+}
