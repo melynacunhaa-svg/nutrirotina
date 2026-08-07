@@ -3243,22 +3243,6 @@ async function setupSupabaseSync() {
         return;
     }
 
-    // MIGRAÇÃO: enviar dados do localStorage pro Supabase (primeira vez)
-    console.log('🔄 Verificando se precisa migrar dados locais...');
-    const migrationDone = localStorage.getItem('nutrirotina_migrated_to_supabase');
-    if (!migrationDone) {
-        const success = await SupabaseData.migrateLocalDataToSupabase({
-            habits: habitsManager,
-            tasks: tasksManager,
-            goals: goalsManager,
-            clinic: clinicManager,
-            gamification: gamificationManager
-        });
-        if (success) {
-            localStorage.setItem('nutrirotina_migrated_to_supabase', 'true');
-        }
-    }
-
     // Carregar dados do Supabase
     try {
         console.log('📥 Carregando dados do Supabase...');

@@ -153,6 +153,24 @@ async function handleAuthSubmit(e) {
         console.log('✅ Sessão salva no localStorage');
       }
 
+      // MIGRAÇÃO: enviar dados do localStorage pro Supabase após login
+      console.log('🔄 Iniciando migração de dados...');
+      setTimeout(async () => {
+        if (typeof SupabaseData !== 'undefined') {
+          const migrationDone = localStorage.getItem('nutrirotina_migrated_to_supabase');
+          if (!migrationDone) {
+            await SupabaseData.migrateLocalDataToSupabase({
+              habits: typeof habitsManager !== 'undefined' ? habitsManager : null,
+              tasks: typeof tasksManager !== 'undefined' ? tasksManager : null,
+              goals: typeof goalsManager !== 'undefined' ? goalsManager : null,
+              clinic: typeof clinicManager !== 'undefined' ? clinicManager : null,
+              gamification: typeof gamificationManager !== 'undefined' ? gamificationManager : null
+            });
+            localStorage.setItem('nutrirotina_migrated_to_supabase', 'true');
+          }
+        }
+      }, 500);
+
       document.getElementById('auth-form').reset();
       showApp();
     } else {
