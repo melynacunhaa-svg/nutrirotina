@@ -478,5 +478,50 @@ window.SupabaseData = {
     } catch (error) {
       console.error('Erro ao salvar gamification:', error);
     }
+  },
+
+  // MIGRAÇÃO: envia todos os dados do localStorage pro Supabase
+  async migrateLocalDataToSupabase(managers) {
+    const userId = await this.getCurrentUserId();
+    if (!userId) {
+      console.warn('⚠️ Sem usuario logado, não pode migrar dados');
+      return;
+    }
+
+    console.log('🚀 Iniciando migração de dados locais → Supabase');
+
+    try {
+      // Migra cada tipo de dado
+      if (managers.habits?.habits?.length > 0) {
+        console.log('📤 Migrando', managers.habits.habits.length, 'hábitos...');
+        await this.saveHabits(managers.habits.habits);
+      }
+
+      if (managers.tasks?.tasks?.length > 0) {
+        console.log('📤 Migrando', managers.tasks.tasks.length, 'tarefas...');
+        await this.saveTasks(managers.tasks.tasks);
+      }
+
+      if (managers.goals?.goals?.length > 0) {
+        console.log('📤 Migrando', managers.goals.goals.length, 'metas...');
+        await this.saveGoals(managers.goals.goals);
+      }
+
+      if (managers.clinic?.appointments?.length > 0) {
+        console.log('📤 Migrando', managers.clinic.appointments.length, 'consultas...');
+        await this.saveClinicAppointments(managers.clinic.appointments);
+      }
+
+      if (managers.gamification?.data?.points > 0) {
+        console.log('📤 Migrando gamificação...');
+        await this.saveGamification(managers.gamification.data);
+      }
+
+      console.log('✅ Migração concluída! Dados sincronizados com Supabase');
+      return true;
+    } catch (error) {
+      console.error('❌ Erro na migração:', error);
+      return false;
+    }
   }
 };
