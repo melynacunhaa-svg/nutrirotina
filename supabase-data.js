@@ -1,6 +1,21 @@
 // Supabase Data Sync - sincroniza dados com o banco
 // Deve ser carregado DEPOIS de supabase-init.js e auth-handler.js
 
+// Função auxiliar: gerar UUID
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+// Função auxiliar: verificar se é UUID válido
+function isValidUUID(id) {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(String(id));
+}
+
 window.SupabaseData = {
   async getCurrentUserId() {
     let attempts = 0;
@@ -45,7 +60,7 @@ window.SupabaseData = {
         const { error } = await window.supabaseClient
           .from('habits')
           .insert(habits.map(h => ({
-            id: h.id,
+            id: isValidUUID(h.id) ? h.id : generateUUID(), // Converter ID se necessário
             user_id: userId,
             name: h.name,
             description: h.description || '',
@@ -99,7 +114,7 @@ window.SupabaseData = {
 
       if (tasks.length > 0) {
         const tasksToInsert = tasks.map(t => ({
-          id: t.id,
+          id: isValidUUID(t.id) ? t.id : generateUUID(),
           user_id: userId,
           title: t.title,
           description: t.description || '',
@@ -155,7 +170,7 @@ window.SupabaseData = {
         const { error } = await window.supabaseClient
           .from('goals')
           .insert(goals.map(g => ({
-            id: g.id,
+            id: isValidUUID(g.id) ? g.id : generateUUID(),
             user_id: userId,
             name: g.name,
             description: g.description || '',
