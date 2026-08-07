@@ -46,9 +46,23 @@ async function checkAuthStatus() {
   }
 
   try {
-    // Pegar sessão diretamente
+    // Verificar localStorage primeiro
+    const savedSession = localStorage.getItem('nutrirotina_session');
+    if (savedSession) {
+      try {
+        const sessionData = JSON.parse(savedSession);
+        console.log('✅ Sessão encontrada no localStorage');
+        currentUser = sessionData.user;
+        showApp();
+        return;
+      } catch (e) {
+        console.warn('Sessão salva inválida:', e);
+      }
+    }
+
+    // Depois verificar sessão do Supabase
     const { data: { session } } = await window.supabaseClient.auth.getSession();
-    console.log('Session:', session);
+    console.log('Session do Supabase:', session);
 
     if (session && session.user) {
       currentUser = session.user;
@@ -126,6 +140,19 @@ async function handleAuthSubmit(e) {
 
     if (result.success) {
       currentUser = result.user;
+
+      // Salvar sessão no localStorage
+      const { data: { session } } = await window.supabaseClient.auth.getSession();
+      if (session) {
+        localStorage.setItem('nutrirotina_session', JSON.stringify({
+          user: session.user,
+          access_token: session.access_token,
+          refresh_token: session.refresh_token,
+          expires_at: session.expires_at
+        }));
+        console.log('✅ Sessão salva no localStorage');
+      }
+
       document.getElementById('auth-form').reset();
       showApp();
     } else {
@@ -168,6 +195,7 @@ async function logout() {
   try {
     await signOut();
     currentUser = null;
+    localStorage.removeItem('nutrirotina_session');
     showAuthScreen();
     console.log('✅ Logout realizado');
   } catch (error) {
