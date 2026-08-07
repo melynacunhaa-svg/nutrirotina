@@ -61,7 +61,19 @@
             </a>
             <a href="#clinic" class="nav-item" data-section="clinic">
                 <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.08-2.5-1.41 1.41L6.5 17l4.08-5.12 2.34 2.85 3.12-4.04-1.41-1.41z"/>
+                    <defs>
+                        <radialGradient id="gearGradient" cx="50%" cy="30%">
+                            <stop offset="0%" style="stop-color:#ff99cc;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#e91e8c;stop-opacity:1" />
+                        </radialGradient>
+                    </defs>
+                    <circle cx="12" cy="12" r="10" fill="url(#gearGradient)"/>
+                    <circle cx="12" cy="12" r="6" fill="white"/>
+                    <!-- Dentes da engrenagem -->
+                    <rect x="10.5" y="1.5" width="3" height="2.5" fill="url(#gearGradient)" rx="0.5"/>
+                    <rect x="10.5" y="20" width="3" height="2.5" fill="url(#gearGradient)" rx="0.5"/>
+                    <rect x="1.5" y="10.5" width="2.5" height="3" fill="url(#gearGradient)" rx="0.5"/>
+                    <rect x="20" y="10.5" width="2.5" height="3" fill="url(#gearGradient)" rx="0.5"/>
                 </svg>
                 <span class="nav-label">Consultório</span>
             </a>
