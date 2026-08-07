@@ -17,6 +17,114 @@ function isValidUUID(id) {
 }
 
 window.SupabaseData = {
+  // Armazenar subscriptions para poder cancelar depois
+  subscriptions: [],
+
+  // Setup realtime sync - sincroniza automaticamente quando dados mudam
+  setupRealtimeSync() {
+    console.log('🔴 Configurando Realtime Sync...');
+    const userId = currentUser?.id;
+    if (!userId) {
+      console.warn('Sem user logado, não pode setup realtime');
+      return;
+    }
+
+    // Listen para mudanças em habits
+    const habitsSubscription = window.supabaseClient
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'habits',
+        filter: `user_id=eq.${userId}`
+      }, (payload) => {
+        console.log('🔄 Mudança em habits:', payload);
+        // Recarregar habits
+        this.loadHabits().then(habits => {
+          if (typeof habitsManager !== 'undefined') {
+            habitsManager.habits = habits.map(h => ({
+              id: h.id,
+              name: h.name,
+              description: h.description,
+              frequency: h.frequency,
+              category: h.category,
+              color: h.color,
+              time: h.time,
+              reminder: h.reminder,
+              weeklyDays: h.weekly_days || [],
+              monthlyDay: h.monthly_day,
+              createdAt: h.created_at,
+              history: {}
+            }));
+            if (typeof renderHabits === 'function') renderHabits();
+            console.log('✅ Habits atualizados no UI');
+          }
+        });
+      })
+      .subscribe();
+
+    // Listen para mudanças em goals
+    const goalsSubscription = window.supabaseClient
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'goals',
+        filter: `user_id=eq.${userId}`
+      }, (payload) => {
+        console.log('🔄 Mudança em goals:', payload);
+        this.loadGoals().then(goals => {
+          if (typeof goalsManager !== 'undefined') {
+            goalsManager.goals = goals.map(g => ({
+              id: g.id,
+              name: g.name,
+              description: g.description || '',
+              startDate: g.start_date,
+              endDate: g.end_date,
+              progress: g.progress || 0,
+              status: g.status || 'em andamento',
+              createdAt: g.created_at,
+              milestones: [],
+              history: []
+            }));
+            if (typeof renderGoals === 'function') renderGoals();
+            console.log('✅ Goals atualizados no UI');
+          }
+        });
+      })
+      .subscribe();
+
+    // Listen para mudanças em tasks
+    const tasksSubscription = window.supabaseClient
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'tasks',
+        filter: `user_id=eq.${userId}`
+      }, (payload) => {
+        console.log('🔄 Mudança em tasks:', payload);
+        this.loadTasks().then(tasks => {
+          if (typeof tasksManager !== 'undefined') {
+            tasksManager.tasks = tasks.map(t => ({
+              id: t.id,
+              title: t.title,
+              description: t.description || '',
+              category: t.category || '',
+              priority: t.priority || 'média',
+              status: t.status || 'pendente',
+              date: t.date,
+              time: t.time || '',
+              createdAt: t.created_at
+            }));
+            if (typeof renderTasks === 'function') renderTasks();
+            console.log('✅ Tasks atualizadas no UI');
+          }
+        });
+      })
+      .subscribe();
+
+    console.log('✅ Realtime Sync ativado!');
+    this.subscriptions = [habitsSubscription, goalsSubscription, tasksSubscription];
+  },
+
   async getCurrentUserId() {
     let attempts = 0;
     while (!currentUser && attempts < 50) {

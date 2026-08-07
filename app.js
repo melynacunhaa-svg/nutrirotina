@@ -3397,5 +3397,10 @@ async function setupSupabaseSync() {
         SupabaseData.saveGamification(this.data).catch(console.error);
     };
 
+    // Ativar Realtime Sync para sincronização automática
+    if (currentUser) {
+        SupabaseData.setupRealtimeSync();
+    }
+
     console.log('✅ Sincronização com Supabase ativada!');
 }
