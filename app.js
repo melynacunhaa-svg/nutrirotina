@@ -3283,44 +3283,56 @@ async function setupSupabaseSync() {
             tasksManager.tasks = tasks.map(t => ({
                 id: t.id,
                 title: t.title,
-                description: t.description,
-                category: t.category,
-                priority: t.priority,
-                status: t.status,
+                description: t.description || '',
+                category: t.category || '',
+                priority: t.priority || 'média',
+                status: t.status || 'pendente',
                 date: t.date,
-                time: t.time,
+                time: t.time || '',
                 createdAt: t.created_at
             }));
             console.log('✅ Tarefas carregadas do Supabase:', tasks.length);
+            // Renderizar as tarefas no UI
+            if (typeof renderTasks === 'function') {
+                renderTasks();
+            }
         }
 
         if (goals.length > 0) {
             goalsManager.goals = goals.map(g => ({
                 id: g.id,
                 name: g.name,
-                description: g.description,
+                description: g.description || '',
                 startDate: g.start_date,
                 endDate: g.end_date,
-                progress: g.progress,
-                status: g.status,
+                progress: g.progress || 0,
+                status: g.status || 'em andamento',
                 createdAt: g.created_at,
                 milestones: [],
                 history: []
             }));
             console.log('✅ Metas carregadas do Supabase:', goals.length);
+            // Renderizar as metas no UI
+            if (typeof renderGoals === 'function') {
+                renderGoals();
+            }
         }
 
         if (appointments.length > 0) {
             clinicManager.appointments = appointments.map(a => ({
                 id: a.id,
                 patientName: a.patient_name,
-                phone: a.phone,
+                phone: a.phone || '',
                 date: a.date,
                 time: a.time,
-                notes: a.notes,
+                notes: a.notes || '',
                 createdAt: a.created_at
             }));
             console.log('✅ Consultório carregado do Supabase:', appointments.length);
+            // Renderizar consultório no UI
+            if (typeof renderClinic === 'function') {
+                renderClinic();
+            }
         }
 
         if (gamification && gamification.points) {
