@@ -167,19 +167,25 @@ window.SupabaseData = {
         .eq('user_id', userId);
 
       if (goals.length > 0) {
-        const { error } = await window.supabaseClient
+        const goalsToInsert = goals.map(g => ({
+          id: isValidUUID(g.id) ? g.id : generateUUID(),
+          user_id: userId,
+          name: g.name,
+          description: g.description || '',
+          start_date: g.startDate || g.start_date,
+          end_date: g.endDate || g.end_date,
+          progress: g.progress || 0,
+          status: g.status || 'em andamento'
+        }));
+        console.log('📤 Goals a inserir:', goalsToInsert);
+        const { data, error } = await window.supabaseClient
           .from('goals')
-          .insert(goals.map(g => ({
-            id: isValidUUID(g.id) ? g.id : generateUUID(),
-            user_id: userId,
-            name: g.name,
-            description: g.description || '',
-            start_date: g.start_date,
-            end_date: g.end_date,
-            progress: g.progress || 0,
-            status: g.status || 'em andamento'
-          })));
-        if (error) throw error;
+          .insert(goalsToInsert);
+        if (error) {
+          console.error('❌ Erro ao inserir goals:', error);
+          throw error;
+        }
+        console.log('✅ Goals inseridas:', data);
       }
       console.log('✅ Metas salvas no Supabase');
     } catch (error) {
@@ -481,15 +487,20 @@ window.SupabaseData = {
     const userId = await this.getCurrentUserId();
     if (!userId) return;
     try {
-      const { error } = await window.supabaseClient
+      const gamifData = {
+        user_id: userId,
+        points: data.points || 0,
+        history: data.history || []
+      };
+      console.log('📤 Gamification a inserir:', gamifData);
+      const { data: insertedData, error } = await window.supabaseClient
         .from('gamification')
-        .upsert({
-          user_id: userId,
-          points: data.points || 0,
-          history: data.history || []
-        }, { onConflict: 'user_id' });
-      if (error) throw error;
-      console.log('✅ Gamification salva no Supabase');
+        .upsert(gamifData);
+      if (error) {
+        console.error('❌ Erro ao inserir gamification:', error);
+        throw error;
+      }
+      console.log('✅ Gamification inserida:', insertedData);
     } catch (error) {
       console.error('Erro ao salvar gamification:', error);
     }
