@@ -1123,7 +1123,7 @@ function renderHabits() {
                         </div>
                     </div>
                 </div>
-                <button type="button" class="delete-habit-btn" data-habit-id="${habit.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
+                <button type="button" class="delete-habit-btn" data-habit-id="${habit.id}" title="Apagar" style="background: transparent; color: #ff4444; border: none; padding: 5px 10px; cursor: pointer; font-size: 14px;">🗑️</button>
             </div>
             ${heatmapHTML}
         `;
@@ -1237,7 +1237,7 @@ function renderGoals() {
         goalCard.innerHTML = `
             <div class="goal-card-header">
                 <div class="goal-title">${goal.name}</div>
-                <button type="button" class="delete-goal-btn" data-goal-id="${goal.id}" title="Apagar meta" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px;">🗑️ Apagar</button>
+                <button type="button" class="delete-goal-btn" data-goal-id="${goal.id}" title="Apagar meta" style="background: transparent; color: #ff4444; border: none; padding: 5px 10px; cursor: pointer; font-size: 14px;">🗑️ Apagar</button>
                 ${goal.description ? `<div class="goal-desc">${goal.description}</div>` : ''}
             </div>
             <div class="goal-progress-bar">
@@ -1355,7 +1355,7 @@ function renderClinic() {
                         <option value="feito" ${appointment.status === 'feito' ? 'selected' : ''}>Feito</option>
                         <option value="cancelado" ${appointment.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
                     </select>
-                    <button type="button" class="delete-appointment-btn" data-appointment-id="${appointment.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
+                    <button type="button" class="delete-appointment-btn" data-appointment-id="${appointment.id}" title="Apagar" style="background: transparent; color: #ff4444; border: none; padding: 5px 10px; cursor: pointer; font-size: 14px;">🗑️</button>
                 </div>
             </div>
             <div class="clinic-datetime">
@@ -1464,7 +1464,7 @@ function renderTasks() {
                         ${dateTimeHTML}
                     </div>
                 </div>
-                <button type="button" class="delete-task-btn" data-task-id="${task.id}" title="Apagar" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">🗑️</button>
+                <button type="button" class="delete-task-btn" data-task-id="${task.id}" title="Apagar" style="background: transparent; color: #ff4444; border: none; padding: 5px 10px; cursor: pointer; font-size: 14px;">🗑️</button>
             </div>
         `;
 
