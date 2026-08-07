@@ -30,11 +30,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function checkAuthStatus() {
-  const user = await getCurrentUser();
-  if (user) {
-    currentUser = user;
-    showApp();
-  } else {
+  console.log('Verificando auth status...');
+
+  // Esperar supabase estar pronto
+  let attempts = 0;
+  while (!window.supabaseClient && attempts < 50) {
+    await new Promise(r => setTimeout(r, 100));
+    attempts++;
+  }
+
+  if (!window.supabaseClient) {
+    console.error('Supabase não inicializou');
+    showAuthScreen();
+    return;
+  }
+
+  try {
+    // Pegar sessão diretamente
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
+    console.log('Session:', session);
+
+    if (session && session.user) {
+      currentUser = session.user;
+      console.log('✅ Usuário já está logado:', session.user.email);
+      showApp();
+    } else {
+      console.log('❌ Nenhuma sessão ativa');
+      showAuthScreen();
+    }
+  } catch (error) {
+    console.error('Erro ao verificar sessão:', error);
     showAuthScreen();
   }
 }
