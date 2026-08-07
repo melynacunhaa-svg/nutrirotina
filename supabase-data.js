@@ -8,7 +8,9 @@ window.SupabaseData = {
       await new Promise(r => setTimeout(r, 100));
       attempts++;
     }
-    return currentUser?.id;
+    const userId = currentUser?.id;
+    console.log('🔑 getUserId:', userId, 'currentUser:', currentUser);
+    return userId;
   },
 
   // HABITS
@@ -82,32 +84,44 @@ window.SupabaseData = {
 
   async saveTasks(tasks) {
     const userId = await this.getCurrentUserId();
-    if (!userId) return;
+    console.log('💾 saveTasks - userId:', userId, 'tasks:', tasks.length);
+    if (!userId) {
+      console.error('❌ Sem userId, não pode salvar tasks');
+      return;
+    }
     try {
-      await window.supabaseClient
+      console.log('🗑️ Deletando tasks antigas...');
+      const delResult = await window.supabaseClient
         .from('tasks')
         .delete()
         .eq('user_id', userId);
+      console.log('Delete result:', delResult);
 
       if (tasks.length > 0) {
-        const { error } = await window.supabaseClient
+        const tasksToInsert = tasks.map(t => ({
+          id: t.id,
+          user_id: userId,
+          title: t.title,
+          description: t.description || '',
+          category: t.category || '',
+          priority: t.priority || 'média',
+          status: t.status || 'pendente',
+          date: t.date || null,
+          time: t.time || ''
+        }));
+        console.log('📤 Inserindo tasks:', tasksToInsert);
+        const { data, error } = await window.supabaseClient
           .from('tasks')
-          .insert(tasks.map(t => ({
-            id: t.id,
-            user_id: userId,
-            title: t.title,
-            description: t.description || '',
-            category: t.category || '',
-            priority: t.priority || 'média',
-            status: t.status || 'pendente',
-            date: t.date || null,
-            time: t.time || ''
-          })));
-        if (error) throw error;
+          .insert(tasksToInsert);
+        if (error) {
+          console.error('❌ Erro ao inserir:', error);
+          throw error;
+        }
+        console.log('✅ Tasks inseridas:', data);
       }
       console.log('✅ Tarefas salvas no Supabase');
     } catch (error) {
-      console.error('Erro ao salvar tasks:', error);
+      console.error('❌ Erro ao salvar tasks:', error);
     }
   },
 
